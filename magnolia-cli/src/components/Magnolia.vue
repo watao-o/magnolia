@@ -321,7 +321,8 @@ export default {
       playGame: false,
       vpCanvas: null,
       warCanvas: null,
-      socket: io('http://localhost:3030'),
+      // socket: io('http://localhost:3030'),
+      socket: io('http://watao-o.github.io/magnolia:3030'),
       selectedCard: {},
       // 山札カード
       deckCards: [],
