@@ -43,4 +43,4 @@ jobs:
           git init
           git add .
           git commit -m "Deploy Vue.js App"
-          git push --force --quiet "https://${{ GITHUB_TOKEN }}@github.com/yourusername/yourrepo.git" master:gh-pages
+          git push --force --quiet "https://${{ secrets.GITHUB_TOKEN }}@github.com/yourusername/yourrepo.git" master:gh-pages
