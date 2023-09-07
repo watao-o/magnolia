@@ -33,7 +33,7 @@ jobs:
           git init
           git add .
           git commit -m "Deploy Vue.js App"
-          git push --force --quiet "https://${{ secrets.GITHUB_TOKEN }}@github.com/watao-o/magnolia.git" master:gh-pages
+          git push --force --quiet "https://${{ secrets.DEPLOY_TOKEN }}@github.com/watao-o/magnolia.git" master:gh-pages
 # magnolia-uiの起動
       - name: Install Dependencies
         working-directory: ./magnolia-ui/  # ディレクトリを移動
