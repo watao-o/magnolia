@@ -1,0 +1,875 @@
+{
+  "unitList": [
+    {
+      "unitId": "unit_0001",
+      "cardNum": 3,
+      "kind": "01",
+      "job": "01",
+      "cost": 3,
+      "name": "人間の騎士",
+      "force": 6,
+      "skillId1": "skill_0021",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0002",
+      "cardNum": 3,
+      "kind": "01",
+      "job": "02",
+      "cost": 1,
+      "name": "人間の行商",
+      "force": 3,
+      "skillId1": "skill_0027",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0003",
+      "cardNum": 3,
+      "kind": "01",
+      "job": "03",
+      "cost": 5,
+      "name": "人間の大工",
+      "force": 2,
+      "skillId1": "skill_0002",
+      "skillId2": "skill_0030"
+    },
+    {
+      "unitId": "unit_0004",
+      "cardNum": 3,
+      "kind": "01",
+      "job": "04",
+      "cost": 3,
+      "name": "人間の呪い師",
+      "force": 4,
+      "skillId1": "skill_0003",
+      "skillId2": "skill_0017"
+    },
+    {
+      "unitId": "unit_0005",
+      "cardNum": 3,
+      "kind": "01",
+      "job": "05",
+      "cost": 3,
+      "name": "人間の聖職者",
+      "force": 2,
+      "skillId1": "skill_0026",
+      "skillId2": "skill_0032"
+    },
+    {
+      "unitId": "unit_0006",
+      "cardNum": 2,
+      "kind": "01",
+      "job": "02",
+      "cost": 2,
+      "name": "人間の大商人",
+      "force": 2,
+      "skillId1": "skill_0029",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0007",
+      "cardNum": 2,
+      "kind": "01",
+      "job": "03",
+      "cost": 3,
+      "name": "人間の葬儀屋",
+      "force": 2,
+      "skillId1": "skill_0002",
+      "skillId2": "skill_0024"
+    },
+    {
+      "unitId": "unit_0008",
+      "cardNum": 1,
+      "kind": "01",
+      "job": "06",
+      "cost": 6,
+      "name": "人間の君主",
+      "force": 6,
+      "skillId1": "skill_0004",
+      "skillId2": "skill_0040"
+    },
+    {
+      "unitId": "unit_0009",
+      "cardNum": 3,
+      "kind": "02",
+      "job": "01",
+      "cost": 2,
+      "name": "ドワーフの拳闘士",
+      "force": 5,
+      "skillId1": "skill_0002",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0010",
+      "cardNum": 3,
+      "kind": "02",
+      "job": "02",
+      "cost": 3,
+      "name": "ドワーフの鉱石屋",
+      "force": 4,
+      "skillId1": "skill_0002",
+      "skillId2": "skill_0028"
+    },
+    {
+      "unitId": "unit_0011",
+      "cardNum": 3,
+      "kind": "02",
+      "job": "03",
+      "cost": 2,
+      "name": "ドワーフの料理人",
+      "force": 1,
+      "skillId1": "skill_0025",
+      "skillId2": "skill_0031"
+    },
+    {
+      "unitId": "unit_0012",
+      "cardNum": 3,
+      "kind": "02",
+      "job": "04",
+      "cost": 2,
+      "name": "ドワーフの錬金術師",
+      "force": 2,
+      "skillId1": "skill_0018",
+      "skillId2": "skill_0027"
+    },
+    {
+      "unitId": "unit_0013",
+      "cardNum": 3,
+      "kind": "02",
+      "job": "05",
+      "cost": 4,
+      "name": "ドワーフの神官",
+      "force": 6,
+      "skillId1": "skill_0025",
+      "skillId2": "skill_0026"
+    },
+    {
+      "unitId": "unit_0014",
+      "cardNum": 2,
+      "kind": "02",
+      "job": "03",
+      "cost": 6,
+      "name": "ドワーフのビール職人",
+      "force": 2,
+      "skillId1": "skill_0038",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0015",
+      "cardNum": 2,
+      "kind": "02",
+      "job": "05",
+      "cost": 4,
+      "name": "ドワーフの聖堂守り",
+      "force": 5,
+      "skillId1": "skill_0027",
+      "skillId2": "skill_0034"
+    },
+    {
+      "unitId": "unit_0016",
+      "cardNum": 1,
+      "kind": "02",
+      "job": "06",
+      "cost": 7,
+      "name": "ドワーフの王",
+      "force": 7,
+      "skillId1": "skill_0012",
+      "skillId2": "skill_0005"
+    },
+    {
+      "unitId": "unit_0017",
+      "cardNum": 3,
+      "kind": "03",
+      "job": "01",
+      "cost": 2,
+      "name": "エルフの射手",
+      "force": 3,
+      "skillId1": "skill_0020",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0018",
+      "cardNum": 3,
+      "kind": "03",
+      "job": "02",
+      "cost": 1,
+      "name": "エルフの交易人",
+      "force": 2,
+      "skillId1": "skill_0003",
+      "skillId2": "skill_0027"
+    },
+    {
+      "unitId": "unit_0019",
+      "cardNum": 3,
+      "kind": "03",
+      "job": "03",
+      "cost": 3,
+      "name": "エルフの芸術家",
+      "force": 1,
+      "skillId1": "skill_0036",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0020",
+      "cardNum": 3,
+      "kind": "03",
+      "job": "04",
+      "cost": 2,
+      "name": "エルフの神秘家",
+      "force": 2,
+      "skillId1": "skill_0003",
+      "skillId2": "skill_0018"
+    },
+    {
+      "unitId": "unit_0021",
+      "cardNum": 3,
+      "kind": "03",
+      "job": "04",
+      "cost": 1,
+      "name": "エルフの祈り手",
+      "force": 2,
+      "skillId1": "skill_0010",
+      "skillId2": "skill_0026"
+    },
+    {
+      "unitId": "unit_0022",
+      "cardNum": 2,
+      "kind": "03",
+      "job": "04",
+      "cost": 6,
+      "name": "エルフの魔術師",
+      "force": 3,
+      "skillId1": "skill_0019",
+      "skillId2": "skill_0022"
+    },
+    {
+      "unitId": "unit_0023",
+      "cardNum": 2,
+      "kind": "03",
+      "job": "05",
+      "cost": 3,
+      "name": "エルフの信奉者",
+      "force": 3,
+      "skillId1": "skill_0011",
+      "skillId2": "skill_0032"
+    },
+    {
+      "unitId": "unit_0024",
+      "cardNum": 1,
+      "kind": "03",
+      "job": "06",
+      "cost": 7,
+      "name": "エルフの女王",
+      "force": 7,
+      "skillId1": "skill_0013",
+      "skillId2": "skill_0006"
+    },
+    {
+      "unitId": "unit_0025",
+      "cardNum": 3,
+      "kind": "04",
+      "job": "01",
+      "cost": 1,
+      "name": "ゴブリンの兵士",
+      "force": 4,
+      "skillId1": "skill_0021",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0026",
+      "cardNum": 3,
+      "kind": "04",
+      "job": "02",
+      "cost": 2,
+      "name": "ゴブリンのゴミ売り",
+      "force": 3,
+      "skillId1": "skill_0021",
+      "skillId2": "skill_0027"
+    },
+    {
+      "unitId": "unit_0027",
+      "cardNum": 3,
+      "kind": "04",
+      "job": "03",
+      "cost": 2,
+      "name": "ゴブリンのガラクタ集め",
+      "force": 4,
+      "skillId1": "skill_0002",
+      "skillId2": "skill_0021"
+    },
+    {
+      "unitId": "unit_0028",
+      "cardNum": 3,
+      "kind": "04",
+      "job": "04",
+      "cost": 1,
+      "name": "ゴブリンの祈祷師",
+      "force": 3,
+      "skillId1": "skill_0003",
+      "skillId2": "skill_0017"
+    },
+    {
+      "unitId": "unit_0029",
+      "cardNum": 3,
+      "kind": "04",
+      "job": "05",
+      "cost": 2,
+      "name": "ゴブリンの錯乱者",
+      "force": 2,
+      "skillId1": "skill_0003",
+      "skillId2": "skill_0032"
+    },
+    {
+      "unitId": "unit_0030",
+      "cardNum": 2,
+      "kind": "04",
+      "job": "01",
+      "cost": 2,
+      "name": "ゴブリンの百人長",
+      "force": 5,
+      "skillId1": "skill_0021",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0031",
+      "cardNum": 2,
+      "kind": "04",
+      "job": "04",
+      "cost": 4,
+      "name": "ゴブリンの戦術家",
+      "force": 4,
+      "skillId1": "skill_0035",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0032",
+      "cardNum": 1,
+      "kind": "04",
+      "job": "06",
+      "cost": 8,
+      "name": "ゴブリンの族長",
+      "force": 2,
+      "skillId1": "skill_0007",
+      "skillId2": "skill_0033"
+    },
+    {
+      "unitId": "unit_0033",
+      "cardNum": 3,
+      "kind": "05",
+      "job": "01",
+      "cost": 2,
+      "name": "鉄のゴーレム",
+      "force": 4,
+      "skillId1": "skill_0016",
+      "skillId2": "skill_0017"
+    },
+    {
+      "unitId": "unit_0034",
+      "cardNum": 3,
+      "kind": "05",
+      "job": "02",
+      "cost": 2,
+      "name": "黄金のゴーレム",
+      "force": 4,
+      "skillId1": "skill_0015",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0035",
+      "cardNum": 3,
+      "kind": "05",
+      "job": "04",
+      "cost": 5,
+      "name": "（笑）のゴーレム",
+      "force": 4,
+      "skillId1": "skill_0018",
+      "skillId2": "skill_0030"
+    },
+    {
+      "unitId": "unit_0036",
+      "cardNum": 2,
+      "kind": "05",
+      "job": "05",
+      "cost": 6,
+      "name": "水晶のゴーレム",
+      "force": 1,
+      "skillId1": "skill_0036",
+      "skillId2": "skill_0037"
+    },
+    {
+      "unitId": "unit_0037",
+      "cardNum": 1,
+      "kind": "05",
+      "job": "06",
+      "cost": 6,
+      "name": "ゴーレムの王",
+      "force": 8,
+      "skillId1": "skill_0001",
+      "skillId2": "skill_0008"
+    },
+    {
+      "unitId": "unit_0038",
+      "cardNum": 3,
+      "kind": "06",
+      "job": "01",
+      "cost": 5,
+      "name": "破壊のデーモン",
+      "force": 8,
+      "skillId1": "skill_0021",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0039",
+      "cardNum": 3,
+      "kind": "06",
+      "job": "02",
+      "cost": 5,
+      "name": "眼のデーモン",
+      "force": 6,
+      "skillId1": "skill_0029",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0040",
+      "cardNum": 3,
+      "kind": "06",
+      "job": "03",
+      "cost": 5,
+      "name": "疫病のデーモン",
+      "force": 4,
+      "skillId1": "skill_0039",
+      "skillId2": ""
+    },
+    {
+      "unitId": "unit_0041",
+      "cardNum": 1,
+      "kind": "06",
+      "job": "06",
+      "cost": 9,
+      "name": "嵐のデーモン",
+      "force": 13,
+      "skillId1": "skill_0009",
+      "skillId2": "skill_0014"
+    }
+  ],
+  "skillList": [
+    {
+      "skillId": "skill_0001",
+      "activePhase": "01",
+      "effectTarget": "06",
+      "effectValue": null,
+      "synergyTarget": "",
+      "explanation": "[技術]技術点と[信仰]信仰点の値を高い方に合わせる"
+    },
+    {
+      "skillId": "skill_0002",
+      "activePhase": "01",
+      "effectTarget": "02",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "1[技術]技術点"
+    },
+    {
+      "skillId": "skill_0003",
+      "activePhase": "01",
+      "effectTarget": "03",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "1[信仰]信仰点"
+    },
+    {
+      "skillId": "skill_0004",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "01",
+      "explanation": "1VP × 人間"
+    },
+    {
+      "skillId": "skill_0005",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "02",
+      "explanation": "1VP × ドワーフ"
+    },
+    {
+      "skillId": "skill_0006",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "03",
+      "explanation": "1VP × エルフ"
+    },
+    {
+      "skillId": "skill_0007",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "04",
+      "explanation": "1VP × ゴブリン"
+    },
+    {
+      "skillId": "skill_0008",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "05",
+      "explanation": "1VP × ゴーレム"
+    },
+    {
+      "skillId": "skill_0009",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "06",
+      "explanation": "1VP × デーモン"
+    },
+    {
+      "skillId": "skill_0010",
+      "activePhase": "01",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "08",
+      "explanation": "1VP × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0011",
+      "activePhase": "01",
+      "effectTarget": "03",
+      "effectValue": 2,
+      "synergyTarget": "",
+      "explanation": "2[信仰]信仰点"
+    },
+    {
+      "skillId": "skill_0012",
+      "activePhase": "01",
+      "effectTarget": "02",
+      "effectValue": 5,
+      "synergyTarget": "",
+      "explanation": "5[技術]技術点"
+    },
+    {
+      "skillId": "skill_0013",
+      "activePhase": "01",
+      "effectTarget": "03",
+      "effectValue": 5,
+      "synergyTarget": "",
+      "explanation": "5[信仰]信仰点"
+    },
+    {
+      "skillId": "skill_0014",
+      "activePhase": "01",
+      "effectTarget": "07",
+      "effectValue": null,
+      "synergyTarget": "",
+      "explanation": "自分が受け取るボーナスを2倍にする"
+    },
+    {
+      "skillId": "skill_0015",
+      "activePhase": "01",
+      "effectTarget": "01",
+      "effectValue": 1,
+      "synergyTarget": "10",
+      "explanation": "1金 × [職業]職業の種類"
+    },
+    {
+      "skillId": "skill_0016",
+      "activePhase": "02",
+      "effectTarget": "04",
+      "effectValue": 1,
+      "synergyTarget": "07",
+      "explanation": "1戦力 × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0017",
+      "activePhase": "02",
+      "effectTarget": "04",
+      "effectValue": 1,
+      "synergyTarget": "08",
+      "explanation": "1戦力 × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0018",
+      "activePhase": "02",
+      "effectTarget": "04",
+      "effectValue": 2,
+      "synergyTarget": "08",
+      "explanation": "2戦力 × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0019",
+      "activePhase": "02",
+      "effectTarget": "04",
+      "effectValue": 3,
+      "synergyTarget": "08",
+      "explanation": "3戦力 × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0020",
+      "activePhase": "02",
+      "effectTarget": "08",
+      "effectValue": null,
+      "synergyTarget": "",
+      "explanation": "前線でなくても戦争に参加する"
+    },
+    {
+      "skillId": "skill_0021",
+      "activePhase": "03",
+      "effectTarget": "09",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "戦争でVPを得たなら、追加で1VP"
+    },
+    {
+      "skillId": "skill_0022",
+      "activePhase": "03",
+      "effectTarget": "09",
+      "effectValue": 1,
+      "synergyTarget": "08",
+      "explanation": "戦争でVPを得たなら、追加で1VP × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0023",
+      "activePhase": "03",
+      "effectTarget": "09",
+      "effectValue": 2,
+      "synergyTarget": "",
+      "explanation": "戦争でVPを得たなら、追加で2VP"
+    },
+    {
+      "skillId": "skill_0024",
+      "activePhase": "03",
+      "effectTarget": "10",
+      "effectValue": 2,
+      "synergyTarget": "",
+      "explanation": "戦争でVPを得なかったなら、2VP"
+    },
+    {
+      "skillId": "skill_0025",
+      "activePhase": "04",
+      "effectTarget": "02",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "1[技術]技術点"
+    },
+    {
+      "skillId": "skill_0026",
+      "activePhase": "04",
+      "effectTarget": "03",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "1[信仰]信仰点"
+    },
+    {
+      "skillId": "skill_0027",
+      "activePhase": "05",
+      "effectTarget": "01",
+      "effectValue": 1,
+      "synergyTarget": "",
+      "explanation": "1金"
+    },
+    {
+      "skillId": "skill_0028",
+      "activePhase": "05",
+      "effectTarget": "01",
+      "effectValue": 1,
+      "synergyTarget": "07",
+      "explanation": "1金 × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0029",
+      "activePhase": "05",
+      "effectTarget": "01",
+      "effectValue": 2,
+      "synergyTarget": "",
+      "explanation": "2金"
+    },
+    {
+      "skillId": "skill_0030",
+      "activePhase": "05",
+      "effectTarget": "01",
+      "effectValue": 2,
+      "synergyTarget": "07",
+      "explanation": "2金 × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0031",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "07",
+      "explanation": "1VP × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0032",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "08",
+      "explanation": "1VP × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0033",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "11",
+      "explanation": "1VP × コスト3以下のユニット"
+    },
+    {
+      "skillId": "skill_0034",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "12",
+      "explanation": "1VP × コスト4以上のユニット"
+    },
+    {
+      "skillId": "skill_0035",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 1,
+      "synergyTarget": "13",
+      "explanation": "1VP × 基本戦力4以上のユニット"
+    },
+    {
+      "skillId": "skill_0036",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 2,
+      "synergyTarget": "07",
+      "explanation": "2VP × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0037",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 2,
+      "synergyTarget": "08",
+      "explanation": "2VP × [信仰]信仰レベル"
+    },
+    {
+      "skillId": "skill_0038",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 3,
+      "synergyTarget": "07",
+      "explanation": "3VP × [技術]技術レベル"
+    },
+    {
+      "skillId": "skill_0039",
+      "activePhase": "06",
+      "effectTarget": "05",
+      "effectValue": 4,
+      "synergyTarget": "",
+      "explanation": "4VP"
+    },
+    {
+      "skillId": "skill_0040",
+      "activePhase": "07",
+      "effectTarget": "05",
+      "effectValue": null,
+      "synergyTarget": "",
+      "explanation": "得点計算時、自分が金で獲得するVPを3倍にする"
+    }
+  ],
+  "bonusList": [
+    {
+      "division": "01",
+      "type": "01",
+      "effectTarget1": "05",
+      "effectValue1": 5,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "01",
+      "type": "02",
+      "effectTarget1": "02",
+      "effectValue1": 2,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "01",
+      "type": "03",
+      "effectTarget1": "03",
+      "effectValue1": 2,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "01",
+      "type": "04",
+      "effectTarget1": "01",
+      "effectValue1": 3,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "01",
+      "type": "05",
+      "effectTarget1": "02",
+      "effectValue1": 2,
+      "effectTarget2": "03",
+      "effectValue2": 2
+    },
+    {
+      "division": "01",
+      "type": "06",
+      "effectTarget1": "05",
+      "effectValue1": 7,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "02",
+      "type": "01",
+      "effectTarget1": "01",
+      "effectValue1": 3,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "02",
+      "type": "02",
+      "effectTarget1": "05",
+      "effectValue1": 5,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "02",
+      "type": "03",
+      "effectTarget1": "02",
+      "effectValue1": 2,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "02",
+      "type": "04",
+      "effectTarget1": "01",
+      "effectValue1": 1,
+      "effectTarget2": "05",
+      "effectValue2": 3
+    },
+    {
+      "division": "02",
+      "type": "05",
+      "effectTarget1": "03",
+      "effectValue1": 2,
+      "effectTarget2": "",
+      "effectValue2": null
+    },
+    {
+      "division": "02",
+      "type": "06",
+      "effectTarget1": "05",
+      "effectValue1": 9,
+      "effectTarget2": "",
+      "effectValue2": null
+    }
+  ]
+}
