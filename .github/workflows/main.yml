@@ -17,16 +17,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
-# magnolia-uiの起動
-      - name: Install Dependencies
-        working-directory: ./magnolia-ui/  # ディレクトリを移動
-        run: npm install
-
-      - name: Build and Deploy
-        run: |
-          # index.jsファイルの実行
-          npx node ./magnolia-ui/index.js
 # magnolia-cliの起動
       - name: Install Dependencies for vue-app
         working-directory: ./docs/
@@ -44,3 +34,13 @@ jobs:
           git add .
           git commit -m "Deploy Vue.js App"
           git push --force --quiet "https://${{ secrets.GITHUB_TOKEN }}@github.com/yourusername/yourrepo.git" master:gh-pages
+# magnolia-uiの起動
+      - name: Install Dependencies
+        working-directory: ./magnolia-ui/  # ディレクトリを移動
+        run: npm install
+
+      - name: Build and Deploy
+        working-directory: ./magnolia-ui/  # ディレクトリを移動
+        run: |
+          # index.jsファイルの実行
+          npx index.js
