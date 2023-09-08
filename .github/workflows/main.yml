@@ -41,25 +41,25 @@ jobs:
           git push --force --quiet "https://${{ secrets.DEPLOY_TOKEN }}@github.com/watao-o/magnolia.git" master:gh-pages
 
   # magnolia-uiの起動
-  build_and_deploy_ui:
-    runs-on: ubuntu-latest
+  # build_and_deploy_ui:
+  #   runs-on: ubuntu-latest
 
-    needs: build_and_deploy  # build_and_deployジョブが完了するのを待つ
+  #   needs: build_and_deploy  # build_and_deployジョブが完了するのを待つ
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
 
-      - name: Install Dependencies
-        working-directory: ./magnolia-ui/  # ディレクトリを移動
-        run: npm install
+  #     - name: Install Dependencies
+  #       working-directory: ./magnolia-ui/  # ディレクトリを移動
+  #       run: npm install
 
-      - name: Build and Deploy
-        run: |
-          # index.jsファイルの実行
-          npx node ./magnolia-ui/index.js
+  #     - name: Build and Deploy
+  #       run: |
+  #         # index.jsファイルの実行
+  #         npx node ./magnolia-ui/index.js

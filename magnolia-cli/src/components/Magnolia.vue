@@ -322,7 +322,7 @@ export default {
       vpCanvas: null,
       warCanvas: null,
       // socket: io('http://localhost:3030'),
-      socket: io('http://watao-o.github.io/magnolia:3030'),
+      socket: io('https://cookie-cream-papyrus.glitch.me'),
       selectedCard: {},
       // 山札カード
       deckCards: [],
