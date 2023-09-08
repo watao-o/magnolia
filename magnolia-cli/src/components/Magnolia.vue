@@ -485,6 +485,7 @@ export default {
      * 入室処理
      */
     createRoom () {
+      console.log('createRoom')
       this.socket.emit("create", this.userName, this.status)
     },
     enterRoom() {
