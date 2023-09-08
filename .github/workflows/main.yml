@@ -47,17 +47,17 @@ jobs:
     needs: build_and_deploy  # build_and_deployジョブが完了するのを待つ
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
       - name: Install Dependencies
-        # working-directory: ./magnolia-ui/  # ディレクトリを移動
-        run: |
-          mkdir -p ./magnolia-ui/  # ディレクトリが存在しない場合、作成する
-          cd ./magnolia-ui/
-          npm install
+        working-directory: ./magnolia-ui/  # ディレクトリを移動
+        run: npm install
 
       - name: Build and Deploy
         run: |
