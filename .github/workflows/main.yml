@@ -55,12 +55,13 @@ jobs:
       - name: Install Dependencies
         # working-directory: ./magnolia-ui/  # ディレクトリを移動
         run: |
-          echo "Current Directory: %cd%"
+          echo "Current Directory: $(pwd)"
           echo "Contents of Current Directory:"
-          dir
+          ls
+          cd ../magnolia-ui/
           npm install
 
       - name: Build and Deploy
         run: |
           # index.jsファイルの実行
-          npx node ./magnolia-ui/index.js
+          npx node index.js
