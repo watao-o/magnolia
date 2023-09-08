@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-# magnolia-cliの起動
+  # magnolia-cliの起動
   build_and_deploy:
     runs-on: ubuntu-latest
 
@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+
       - name: Install Dependencies for vue-app
         working-directory: ./docs/
         run: npm install
@@ -39,15 +40,18 @@ jobs:
           git commit -m "Deploy Vue.js App"
           git push --force --quiet "https://${{ secrets.DEPLOY_TOKEN }}@github.com/watao-o/magnolia.git" master:gh-pages
 
-# magnolia-uiの起動
+  # magnolia-uiの起動
   build_and_deploy_ui:
     runs-on: ubuntu-latest
 
     needs: build_and_deploy  # build_and_deployジョブが完了するのを待つ
+
+    steps:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+
       - name: Install Dependencies
         working-directory: ./magnolia-ui/  # ディレクトリを移動
         run: npm install
