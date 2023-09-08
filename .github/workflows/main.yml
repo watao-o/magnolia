@@ -53,8 +53,12 @@ jobs:
           node-version: '14'
 
       - name: Install Dependencies
-        working-directory: ./magnolia-ui/  # ディレクトリを移動
-        run: npm install
+        # working-directory: ./magnolia-ui/  # ディレクトリを移動
+        run: |
+          echo "Current Directory: %cd%"
+          echo "Contents of Current Directory:"
+          dir
+          npm install
 
       - name: Build and Deploy
         run: |
