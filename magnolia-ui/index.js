@@ -133,11 +133,11 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit("notifyError", "誰も参加していません");
       return;
     }
-    // TODO:全員が配置フェーズを終了したか判定
+    // 全員が配置フェーズを終了したか判定
     const user = room.users.find((u) => u.socketId === socket.id)
-    console.log(user)
+    // console.log(user)
     user.configEnd = true
-    console.log(room.users)
+    // console.log(room.users)
     // 自分以外のプレイヤーに通知
     socket.broadcast.emit('announceEndPhase', user.name)
     // 全員配置フェーズを終了していたら、次のフェーズへ
@@ -160,15 +160,23 @@ io.on("connection", (socket) => {
     console.log('warPhase処理受信')
     const user = room.users.find((u) => u.name === userName)
     user.cards = cards
-    user.force = status.force
-    // 自分より戦力が高い人の数 + 1が順位になる
-    const rank = room.users.filter(u => u.force > user.force).length + 1
-    // 順位を返却して終了
-    socket.emit('endWarPhase', rank)
+    user.endWar = true
+    // 全員戦力の更新が終了していれば次処理へ
+    if (!room.users.find((u) => !u.endWar)) {
+      // 自分より戦力が高い人の数 + 1が順位になる
+      room.users.forEach(myu => {
+        console.log('戦力  ', myu.name, ':', myu.status.force)
+        myu.rank = room.users.filter(u => u.status.force > myu.status.force).length + 1
+        myu.emdWar = false
+      })
+      // 順位を返却して終了
+      io.to(room.id).emit("endWarPhase", room)
+    }
   })
 
   // ステータス更新処理
   socket.on('updateStatus', (roomId, userName, status) => {
+    console.log('ステータス更新:', userName, status)
     const room = rooms.find(r => r.id == roomId)
     // 対象ユーザを取得
     const user = room.users.find((u) => u.name === userName)
@@ -218,7 +226,6 @@ function generateRoomId() {
   return id;
 }
 
-http.listen(3030, () => {
-  console.log('Server is running on port 3030');
-  console.log(http)
+http.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
