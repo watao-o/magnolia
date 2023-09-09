@@ -10,14 +10,17 @@
 import { fabric } from 'fabric'
 // import { utils } from '@/utils/commonUtils'
 import { CARD_SIZE } from '@/const/common'
-// import _ from 'lodash'
+import _ from 'lodash'
+import CardData from '@/assets/data.json'
 
 export default {
   name: 'cardPlace',
   props: {
     selectedCard: { type: Object },
     cardImgList: { type:Array },
-    canvasName: { type: String , require: true}
+    canvasName: { type: String , require: true},
+    status: { type: Object },
+    addCards: { type: Object }
   },
   // mixins: [utils],
   data () {
@@ -69,6 +72,12 @@ export default {
       // カード設置処理
       rect.on('mousedown', () => {
         if (rect.Installable) {
+          // 残金をカードのコストが超える場合
+          if (this.chkCost()) {
+            console.log('お金足りない')
+            this.$emit('openSnackbar', 'お金が足りません。')
+            return;
+          }
           // カード設置
           fabric.Image.fromURL(this.selectedCard.img, (obj) =>  {
             var oImg = obj.set({ 
@@ -100,6 +109,20 @@ export default {
           this._disHighLight()
         }
       })
+    },
+    /**
+     * コストチェック
+     */
+    chkCost () {
+      // 設置カードのコストを取得
+      let totalCost = CardData.unitList.find(u => u.unitId === this.selectedCard.unitId).cost
+      // 同ターンで設置済みのカードがあれば考慮する
+      if (!_.isEmpty(this.addCards)) {
+        totalCost += CardData.unitList.find(u => u.unitId === this.addCards[0].unitId).cost
+      }
+      // カード設置1枚目なら残金+1まで設置可能
+      // 2枚目なら残金を超える設置は不可
+      return _.isEmpty(this.addCards) ? this.status.money + 1 < totalCost : this.status.money < totalCost
     },
     /**
      * カード縦横３枚設置チェック
