@@ -70,7 +70,7 @@
       <v-col cols="1" class="border custom-col"><span class="custom-text">信仰レベル</span></v-col>
       <v-col cols="2" class="border custom-col"><span class="custom-text">VP</span></v-col>
     </v-row>
-       <v-list class="pa-0">
+    <v-list class="pa-0">
       <!-- <v-list-item
         v-for="(user, index) in otherPlayers"
         :key="index"
@@ -188,54 +188,31 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row class="custom-col">
+    <v-row class="custom-col pb-6 mb-6">
       <span class="custom-text">他プレイヤーの設置カード(comming soon...)</span>
 
     </v-row>
-    <v-row>
-      <v-col cols="6">
-        <card-place
-          ref="otherCardPlace1"
-          :selectedCard="selectedCard"
-          canvasName="otherCardPlace1"
-          @removeHnadCard="removeHnadCard()"
-          @endPhase="endPhase()"
-          @addExistCardList="addExistCardList($event)"
-        />
-      </v-col>
-      <v-col cols="6">
-        <card-place
-          ref="otherCardPlace2"
-          :selectedCard="selectedCard"
-          canvasName="otherCardPlace2"
-          @removeHnadCard="removeHnadCard()"
-          @endPhase="endPhase()"
-          @addExistCardList="addExistCardList($event)"
-        />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="6">
-        <card-place
-          ref="otherCardPlace3"
-          :selectedCard="selectedCard"
-          canvasName="otherCardPlace3"
-          @removeHnadCard="removeHnadCard()"
-          @endPhase="endPhase()"
-          @addExistCardList="addExistCardList($event)"
-        />
-      </v-col>
-      <v-col cols="6">
-        <card-place
-          ref="otherCardPlace4"
-          :selectedCard="selectedCard"
-          canvasName="otherCardPlace4"
-          @removeHnadCard="removeHnadCard()"
-          @endPhase="endPhase()"
-          @addExistCardList="addExistCardList($event)"
-        />
-      </v-col>
-    </v-row>
+    <v-list class="pa-0 pt-6 transparent-list">
+      <v-list-item
+        v-for="(user, index) in room.users ? room.users.filter(u => u.name !== userName) : []"
+        :key="index"
+        class="pa-0"
+      >
+      <v-row><span class="custom-text">{{ user.name }}</span></v-row>
+      <v-row>
+        <v-col cols="6">
+          <card-place
+            :ref="index"
+            :canvasName="user.name"
+            :cards="user.cards"
+            @removeHnadCard="removeHnadCard()"
+            @endPhase="endPhase()"
+            @addExistCardList="addExistCardList($event)"
+          />
+        </v-col>
+      </v-row>
+      </v-list-item>
+    </v-list>
     <!-- 通知専用ダイアログ -->
     <phase-dialog
       ref="announceDialog"
@@ -597,7 +574,8 @@ export default {
       unitInfo = {
         ...unitInfo,
         posX: selectedCard.posX,
-        posY: selectedCard.posY
+        posY: selectedCard.posY,
+        img: selectedCard.img
       }
       // ユニット情報を追加
       this.addCards.push(unitInfo)
@@ -1079,5 +1057,9 @@ export default {
 .max-dimensions {
   max-width: auto; /* 最大幅を800pxに設定 */
   max-height: auto; /* 最大高さを600pxに設定 */
+}
+
+.transparent-list {
+  background-color: transparent;
 }
 </style>
