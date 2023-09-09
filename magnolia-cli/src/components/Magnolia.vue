@@ -325,7 +325,8 @@ export default {
       vpCanvas: null,
       warCanvas: null,
       // socket: io('http://localhost:3000'),
-      socket: io('https://cookie-cream-papyrus.glitch.me'),
+      // socket: io('https://cookie-cream-papyrus.glitch.me'),
+      socket: io('https://sparkling-cooked-era.glitch.me'),
       selectedCard: {},
       // 山札カード
       deckCards: [],
@@ -453,7 +454,7 @@ export default {
     // 他プレイヤーの配置終了通知
     this.socket.on('announceEndPhase', (name) => {
       console.log(name,'さんが配置を終了しました')
-      this.message = name,'さんが配置を終了しました'
+      this.message = name + 'さんが配置を終了しました'
       this.snackbar = true
     })
 
