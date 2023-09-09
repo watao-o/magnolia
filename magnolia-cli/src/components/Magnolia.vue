@@ -453,6 +453,8 @@ export default {
     // 他プレイヤーの配置終了通知
     this.socket.on('announceEndPhase', (name) => {
       console.log(name,'さんが配置を終了しました')
+      this.message = name,'さんが配置を終了しました'
+      this.snackbar = true
     })
 
     // 全員配置フェーズが終了
@@ -465,12 +467,15 @@ export default {
     })
 
     // 戦争フェーズ終了
-    this.socket.on('endWarPhase', (rank) => {
+    this.socket.on('endWarPhase', (room) => {
+      this.$refs.waitDialog.closeDialog()
+      this.room = room
+      const myUser = room.users.find(u => u.name === this.userName)
       console.log('■■■■■■戦争■■■■■■■■')
-      console.log('順位:',rank)
+      console.log('順位:',myUser.rank)
       console.log('vp獲得前:',this.status.vp)
       // 戦争勝利vpを計算
-      const getWarVp = this.getWarVp(rank)
+      const getWarVp = this.getWarVp(myUser.rank)
       this.status.vp += getWarVp
       console.log('vp獲得後:',this.status.vp)
       this.snackbar = true
@@ -780,7 +785,12 @@ export default {
       console.log('warPhase呼び出し')
       // エルフの射手が設置済みかつ前線に存在しない場合、戦力を追加
       this.elvenArcher(frontUits)
-      this.socket.emit('warPhase', this.roomId, this.status, this.userName, this.existCardList)
+      // 待機ダイアログを開く
+      this.$refs.waitDialog.openDialog('他プレイヤーの更新を待っています')
+      // 戦力の更新を待つため、遅延を挟む
+      setTimeout(() => {
+        this.socket.emit('warPhase', this.roomId, this.status, this.userName, this.existCardList)
+      }, 500);
     },
     /**
      * 前線ユニット取得
