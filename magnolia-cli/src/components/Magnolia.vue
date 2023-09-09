@@ -141,6 +141,9 @@
           :selectedCard="selectedCard"
           canvasName="cardPlace"
           :deckCards="deckCards"
+          :status="status"
+          :addCards="addCards"
+          @openSnackbar="openSnackbar($event)"
           @removeHnadCard="removeHnadCard()"
           @endPhase="endPhase()"
           @addExistCardList="addExistCardList($event)"
@@ -321,7 +324,7 @@ export default {
       playGame: false,
       vpCanvas: null,
       warCanvas: null,
-      // socket: io('http://localhost:3030'),
+      // socket: io('http://localhost:3000'),
       socket: io('https://cookie-cream-papyrus.glitch.me'),
       selectedCard: {},
       // 山札カード
@@ -1020,6 +1023,10 @@ export default {
       } else if(point <= 15) {
         return 4
       }
+    },
+    openSnackbar (message) { 
+      this.message = message
+      this.snackbar = true
     }
     
   }
