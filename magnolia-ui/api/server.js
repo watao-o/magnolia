@@ -5,9 +5,8 @@ const http = require("http").createServer(function (req, res) {
 const io = require("socket.io")(http, {
   cors: {
     origin: [
-      "https://watao-o.github.io/magnolia/",
-      "http://localhost:8080",
-      "https://watao-o.github.io",
+      "https://watao-o.github.io/magnolia", 
+      "http://localhost:8080"
     ],
     credentials: true
   },
