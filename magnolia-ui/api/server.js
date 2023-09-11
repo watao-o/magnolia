@@ -8,6 +8,7 @@ const io = require("socket.io")(http, {
       "https://watao-o.github.io/magnolia", 
       "http://localhost:8080"
     ],
+    methods: ["GET", "POST"],
     credentials: true
   },
 });
