@@ -6,6 +6,7 @@ const io = require("socket.io")(http, {
   cors: {
     origin: [
       "http://localhost:8080",
+      "https://watao-o.github.io",
       "https://watao-o.github.io/magnolia/"
     ],
   },
