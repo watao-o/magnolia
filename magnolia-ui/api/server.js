@@ -233,6 +233,6 @@ function generateRoomId() {
   return id;
 }
 
-http.listen(3030, () => {
-  console.log('Server is running on port 3030');
+http.listen(process.env.PORT || 3000, () => {
+  console.log('Server is running on port' + (process.env.PORT || 3000));
 });
