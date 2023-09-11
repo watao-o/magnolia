@@ -304,7 +304,7 @@ export default {
       // socket: io('http://localhost:3030'),
       // socket: io('https://cookie-cream-papyrus.glitch.me'),
       // socket: io('https://sparkling-cooked-era.glitch.me'),
-      socket: io('http://52.198.13.58:3030/'),
+      socket: io('https://magnolia-kkgc.onrender.com/'),
       selectedCard: {},
       // 山札カード
       deckCards: [],
