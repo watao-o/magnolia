@@ -304,7 +304,7 @@ export default {
       // socket: io('http://localhost:3000'),
       // socket: io('https://cookie-cream-papyrus.glitch.me'),
       // socket: io('https://sparkling-cooked-era.glitch.me'),
-      socket: io('https://magnolia-zeta.vercel.app/'),
+      socket: io('https://magnolia-watao-o.vercel.app/'),
       selectedCard: {},
       // 山札カード
       deckCards: [],
