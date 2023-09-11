@@ -11,6 +11,7 @@ const io = require("socket.io")(http, {
     methods: ["GET", "POST"],
     credentials: true
   },
+  cors_allowed_origins:"*"
 });
 const rooms = [];
 
