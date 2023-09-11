@@ -2,20 +2,15 @@ const http = require("http").createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World\n');
 });
-// const io = require("socket.io")(http, {
-//   cors: {
-//     origin: [
-//       "http://localhost:8080",
-//       "https://watao-o.github.io",
-//       "https://watao-o.github.io/magnolia/"
-//     ],
-//   },
-// });
-const io = new Server(http, {
+const io = require("socket.io")(http, {
   cors: {
-    origin: "https://watao-o.github.io/magnolia/",
+    origin: [
+      "https://watao-o.github.io/magnolia/",
+      "http://localhost:8080",
+      "https://watao-o.github.io",
+    ],
     credentials: true
-  }
+  },
 });
 const rooms = [];
 
