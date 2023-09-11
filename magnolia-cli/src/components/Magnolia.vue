@@ -351,6 +351,11 @@ export default {
     this.socket.on('connect', () => {
       console.log('connected')
     })
+    this.socket.on('error', (error) => {
+      console.log('Connection Error:', error)
+      this.message = 'Connection Error: ' + error
+      this.snackbar = true
+    })
     this.init()
   },
   computed: {
