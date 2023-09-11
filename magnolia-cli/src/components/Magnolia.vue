@@ -301,10 +301,10 @@ export default {
       playGame: false,
       vpCanvas: null,
       warCanvas: null,
-      // socket: io('http://localhost:3000'),
+      // socket: io('http://localhost:3030'),
       // socket: io('https://cookie-cream-papyrus.glitch.me'),
       // socket: io('https://sparkling-cooked-era.glitch.me'),
-      socket: io('https://http://52.198.13.58:3030/'),
+      socket: io('http://52.198.13.58:3030/'),
       selectedCard: {},
       // 山札カード
       deckCards: [],

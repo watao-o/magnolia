@@ -4,8 +4,10 @@ const http = require("http").createServer(function (req, res) {
 });
 const io = require("socket.io")(http, {
   cors: {
-    // origin: ["http://localhost:8080"],
-    origin: ["https://watao-o.github.io/magnolia/"],
+    origin: [
+      "http://localhost:8080",
+      "https://watao-o.github.io/magnolia/"
+    ],
   },
 });
 const rooms = [];
