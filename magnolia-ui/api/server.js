@@ -201,6 +201,7 @@ io.on("connection", (socket) => {
   socket.on('endGame', (roomId) => {
     console.log("ゲーム終了")
     const room = rooms.find(r => r.id == roomId)
+    io.to(room.id).emit("announceEndGame", room)
   })
    // 接続が切れた場合
    socket.on("disconnect", () => {

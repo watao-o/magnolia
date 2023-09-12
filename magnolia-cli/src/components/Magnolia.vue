@@ -44,11 +44,10 @@
           class="border"
         >入室する</v-btn>
       </v-col>
-      <v-col>
+      <v-col cols="1">
         <span class="custom-text">参加人数: {{ playerNum }}</span>
       </v-col>
-    </v-row>
-      <v-row>
+      <v-col cols="2">
         <v-btn
           color="rgb(231, 177, 63)"
           @click="gameStart"
@@ -59,7 +58,8 @@
           max-width="500"
           :disabled="!joinRoom || playGame"
         >＜＜＜＜ゲームスタート＞＞＞＞</v-btn>
-      </v-row>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col cols="2" class="border custom-col"><span class="custom-text">Player</span></v-col>
       <v-col cols="2" class="border custom-col"><span class="custom-text">お金</span></v-col>
@@ -71,10 +71,6 @@
       <v-col cols="2" class="border custom-col"><span class="custom-text">VP</span></v-col>
     </v-row>
     <v-list class="pa-0">
-      <!-- <v-list-item
-        v-for="(user, index) in otherPlayers"
-        :key="index"
-      > -->
       <v-list-item
         v-for="(user, index) in room.users ? room.users : []"
         :key="index"
@@ -129,7 +125,6 @@
       <v-col cols=6 class="custom-col border"><span class="custom-text">プレイヤーカード置き場</span></v-col>
       <v-col cols=6 class="custom-col border"><span class="custom-text">手札</span></v-col>
     </v-row>
-    <!-- <v-btn @click="snackbar=true">Show Toast</v-btn> -->
     <v-snackbar v-model="snackbar" :timeout="3000">
       <span class="custom-text-snack">{{message}}</span>
     </v-snackbar>
@@ -165,7 +160,7 @@
             <v-btn
               :color="!trashFlg ? 'grey' : 'primary'"
               @click="trashCard()"
-              :disabled="!trashFlg"
+              :disabled="!trashFlg || endGame"
               class="border"
             >捨てるよ</v-btn>
           </v-col>
@@ -173,7 +168,7 @@
             <v-btn
               :color="!trashFlg ? 'grey' : 'primary'"
               @click="endTrash()"
-              :disabled="!trashFlg"
+              :disabled="!trashFlg || endGame"
               class="border"
             >捨てるの終わったよ</v-btn>
           </v-col>
@@ -182,7 +177,7 @@
           <v-btn
             :color="trashFlg || !playGame ? 'grey' : 'primary'"
             @click="endPhase"
-            :disabled="trashFlg || !playGame"
+            :disabled="trashFlg || !playGame || endGame"
             class="border"
           >ターン終了</v-btn>
         </v-row>
@@ -259,6 +254,11 @@
     <wait-dialog
       ref="waitDialog"
      />
+     <!-- ゲーム終了結果通知 -->
+     <result-dialog
+      ref="resultDialog"
+      :room="room"
+     />
   </v-container>
 </template>
 
@@ -276,6 +276,7 @@ import  {
 } from '@/const/common'
 import PhaseDialog from './PhaseDialog.vue'
 import WaitDialog from './WaitDialog.vue'
+import ResultDialog from './ResultDialog.vue'
 import CardData from '@/assets/data.json'
 import _ from 'lodash'
 import { io } from 'socket.io-client'
@@ -289,7 +290,8 @@ export default {
     CardPlace,
     HandCard,
     PhaseDialog,
-    WaitDialog
+    WaitDialog,
+    ResultDialog
   },
   data () {
     return {
@@ -299,17 +301,12 @@ export default {
       // 部屋参加有無
       joinRoom: false,
       playGame: false,
+      endGame: false,
       vpCanvas: null,
       warCanvas: null,
       // socket: io('http://localhost:3030'),
-      // socket: io('https://cookie-cream-papyrus.glitch.me'),
-      // socket: io('https://sparkling-cooked-era.glitch.me'),
       socket: io('https://magnolia-kkgc.onrender.com/', {
         transports: ["websocket"] // skip hppt polling
-        // withCredentials: true,
-        // extraHeaders: {
-        //   "my-custom-header": "abcd"
-        // }
       }),
       selectedCard: {},
       // 山札カード
@@ -367,9 +364,6 @@ export default {
   computed: {
     otherPlayers () {
         // ユーザ名が一致しない（他プレイヤー）ユーザのリストを返す
-        console.log('■computed')
-        console.log(this.room)
-        console.log(this.room.users)
         return this.room.users ? this.room.users.filter(u => u.name !== this.userName)
          : []
     }
@@ -476,6 +470,12 @@ export default {
         this.addWarVp(this.cardData.skillList.find(skill => skill.skillId === ec.skillId12), getWarVp)
       })
       console.log('vp追加獲得後:',this.status.vp)
+    })
+
+    this.socket.on('announceEndGame', (room) => {
+      this.room = room
+      // 結果通知ダイアログを開く
+      this.$refs.resultDialog.openDialog()
     })
   },
   methods: {
@@ -956,8 +956,10 @@ export default {
       // 終了条件判定
       if (this.status.vp >= 40 || this.existCardList.length >= 9) { 
         console.log('ゲーム終了')
-        this.$refs.announceDialog.openDialog('ゲーム終了です!!!!')
-        this.socket.emit('endGame', this.roomId)
+        // 遅延を挟んで他ユーザに通知
+        setTimeout(() => {
+          this.socket.emit('endGame', this.roomId)
+        }, 500);
         return
       }
     },
