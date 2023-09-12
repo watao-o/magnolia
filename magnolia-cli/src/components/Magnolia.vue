@@ -305,10 +305,11 @@ export default {
       // socket: io('https://cookie-cream-papyrus.glitch.me'),
       // socket: io('https://sparkling-cooked-era.glitch.me'),
       socket: io('https://magnolia-kkgc.onrender.com/', {
-        withCredentials: true,
-        extraHeaders: {
-          "my-custom-header": "abcd"
-        }
+        transports: ["websocket"] // skip hppt polling
+        // withCredentials: true,
+        // extraHeaders: {
+        //   "my-custom-header": "abcd"
+        // }
       }),
       selectedCard: {},
       // 山札カード
