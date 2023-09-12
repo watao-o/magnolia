@@ -473,6 +473,7 @@ export default {
 
     this.socket.on('announceEndGame', (room) => {
       this.room = room
+      this.endGame = true
       // 結果通知ダイアログを開く
       this.$refs.resultDialog.openDialog()
     })
