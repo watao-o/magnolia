@@ -20,9 +20,7 @@ export default {
     cardImgList: { type:Array },
     canvasName: { type: String , require: true},
     status: { type: Object },
-    addCards: { type: Object },
-    // 他プレイヤーのカード
-    cards: { type: Array }
+    addCards: { type: Object }
   },
   // mixins: [utils],
   data () {
@@ -259,31 +257,6 @@ export default {
         this.$emit('endPhase')
       }
     },
-    /**
-     * 他プレイヤーのカード描画
-     */    
-    _drawOtherPlayerCards (newCards) {
-      // 描画しているカードを全撤去
-      const oldCards = this.canvaz.getObjects().filter(obj => obj.type === 'image')
-      oldCards.forEach(c => {
-        this.canvaz.remove(c)
-      })
-      // 新しいカードを再描画
-      newCards.forEach(c => {
-        // カード設置
-        fabric.Image.fromURL(c.img, (obj) =>  {
-          var oImg = obj.set({ 
-              left: CARD_SIZE.X * c.posX,
-              top: CARD_SIZE.Y * c.posY
-            })
-          oImg.scaleToWidth(CARD_SIZE.X)
-          oImg.selectable = false
-          oImg.id = 'card'
-          this.canvaz.add(oImg)
-        })
-      })
-      this.canvaz.renderAll()
-   },
     /**
      * 0~maxのランダムの整数取得
      */

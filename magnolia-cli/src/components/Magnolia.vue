@@ -196,13 +196,10 @@
       <v-row><span class="custom-text">{{ user.name }}</span></v-row>
       <v-row>
         <v-col cols="6">
-          <card-place
+          <other-card-place
             :ref="index"
             :canvasName="user.name"
             :cards="user.cards"
-            @removeHnadCard="removeHnadCard()"
-            @endPhase="endPhase()"
-            @addExistCardList="addExistCardList($event)"
           />
         </v-col>
       </v-row>
@@ -277,6 +274,7 @@ import  {
 import PhaseDialog from './PhaseDialog.vue'
 import WaitDialog from './WaitDialog.vue'
 import ResultDialog from './ResultDialog.vue'
+import OtherCardPlace from './OtherCardPlace.vue'
 import CardData from '@/assets/data.json'
 import _ from 'lodash'
 import { io } from 'socket.io-client'
@@ -291,7 +289,8 @@ export default {
     HandCard,
     PhaseDialog,
     WaitDialog,
-    ResultDialog
+    ResultDialog,
+    OtherCardPlace
   },
   data () {
     return {
