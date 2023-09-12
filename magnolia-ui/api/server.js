@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
     }
     rooms.push(room)
     socket.join(roomId)
-    console.log(room)
     io.to(socket.id).emit("updateRoom", room, room.users.length)
   })
     // 部屋に入室する
@@ -57,10 +56,8 @@ io.on("connection", (socket) => {
         io.to(socket.id).emit("notifyError", "名前を入力してください");
         return;
       }
-      console.log("room:", rooms)
       console.log("roomId:", roomId)
       const room = rooms.find(r => r.id == roomId)
-      console.log(room)
       if (!room) {
         console.log("部屋が見つかりません")
         io.to(socket.id).emit("notifyError", "部屋が見つかりません");

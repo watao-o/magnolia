@@ -34,7 +34,7 @@
           color="black"
           :disabled="joinRoom"
           class="border"
-        >部屋を作成する</v-btn>
+        ><v-icon icon="mdi-new-box" color="white"/>部屋を作成する</v-btn>
       </v-col>
       <v-col cols="1">
         <v-btn
@@ -42,14 +42,14 @@
           color="black"
           :disabled="joinRoom"
           class="border"
-        >入室する</v-btn>
-      </v-col>
+        ><v-icon icon="mdi-door-open" color="white"/>入室する</v-btn>
+        </v-col>
       <v-col cols="1">
         <span class="custom-text">参加人数: {{ playerNum }}</span>
       </v-col>
       <v-col cols="2">
         <v-btn
-          color="rgb(231, 177, 63)"
+          :color="!joinRoom || playGame ? 'grey' : 'black'"
           @click="gameStart"
           elevation="20"
           height="100"
@@ -57,18 +57,18 @@
           rounded
           max-width="500"
           :disabled="!joinRoom || playGame"
-        >＜＜＜＜ゲームスタート＞＞＞＞</v-btn>
+        ><v-icon icon="mdi-play"/>＜＜＜＜ゲームスタート＞＞＞＞</v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="2" class="border custom-col"><span class="custom-text">Player</span></v-col>
-      <v-col cols="2" class="border custom-col"><span class="custom-text">お金</span></v-col>
-      <v-col cols="2" class="border custom-col"><span class="custom-text">戦力</span></v-col>
-      <v-col cols="1" class="border custom-col"><span class="custom-text">技術点</span></v-col>
-      <v-col cols="1" class="border custom-col"><span class="custom-text">技術レベル</span></v-col>
-      <v-col cols="1" class="border custom-col"><span class="custom-text">信仰点</span></v-col>
-      <v-col cols="1" class="border custom-col"><span class="custom-text">信仰レベル</span></v-col>
-      <v-col cols="2" class="border custom-col"><span class="custom-text">VP</span></v-col>
+      <v-col cols="2" class="border custom-col"><v-icon icon="mdi-human"/><span class="custom-text">Player</span></v-col>
+      <v-col cols="2" class="border custom-col"><v-icon icon="mdi-gold"/><span class="custom-text">お金</span></v-col>
+      <v-col cols="2" class="border custom-col"><v-icon icon="mdi-shield-cross"/><span class="custom-text">戦力</span></v-col>
+      <v-col cols="1" class="border custom-col"><v-icon icon="mdi-cog-box"/><span class="custom-text">技術点</span></v-col>
+      <v-col cols="1" class="border custom-col"><v-icon icon="mdi-cog-box"/><span class="custom-text">技術レベル</span></v-col>
+      <v-col cols="1" class="border custom-col"><v-icon icon="mdi-book-cross"/><span class="custom-text">信仰点</span></v-col>
+      <v-col cols="1" class="border custom-col"><v-icon icon="mdi-book-cross"/><span class="custom-text">信仰レベル</span></v-col>
+      <v-col cols="2" class="border custom-col"><v-icon icon="mdi-star-face"/><span class="custom-text">VP</span></v-col>
     </v-row>
     <v-list class="pa-0">
       <v-list-item
@@ -122,8 +122,8 @@
       </v-list-item>
     </v-list>
     <v-row class="pt-6">
-      <v-col cols=6 class="custom-col border"><span class="custom-text">プレイヤーカード置き場</span></v-col>
-      <v-col cols=6 class="custom-col border"><span class="custom-text">手札</span></v-col>
+      <v-col cols=6 class="custom-col border"><v-icon icon="mdi-cards"/><span class="custom-text">プレイヤーカード置き場</span></v-col>
+      <v-col cols=6 class="custom-col border"><v-icon icon="mdi-cards"/><span class="custom-text">手札</span></v-col>
     </v-row>
     <v-snackbar v-model="snackbar" :timeout="3000">
       <span class="custom-text-snack">{{message}}</span>
@@ -162,7 +162,7 @@
               @click="trashCard()"
               :disabled="!trashFlg || endGame"
               class="border"
-            >捨てるよ</v-btn>
+            ><v-icon icon="mdi-trash-can-outline"/>捨てる</v-btn>
           </v-col>
           <v-col cols="6">
             <v-btn
@@ -170,7 +170,7 @@
               @click="endTrash()"
               :disabled="!trashFlg || endGame"
               class="border"
-            >捨てるの終わったよ</v-btn>
+            ><v-icon icon="mdi-trash-can-outline"/>捨てるの終わったよ</v-btn>
           </v-col>
         </v-row>
         <v-row>
@@ -179,7 +179,7 @@
             @click="endPhase"
             :disabled="trashFlg || !playGame || endGame"
             class="border"
-          >ターン終了</v-btn>
+          ><v-icon icon="mdi-send"/>ターン終了</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -1046,7 +1046,7 @@ export default {
 }
 
 .custom-text {
-  font-size: 23px;
+  font-size: 18px;
 }
 
 .player-back {
