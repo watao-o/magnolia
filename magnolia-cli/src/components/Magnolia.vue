@@ -34,7 +34,7 @@
           color="black"
           :disabled="joinRoom"
           class="border"
-        ><v-icon icon="mdi-new-box" color="white"/>部屋を作成する</v-btn>
+        ><v-icon icon="mdi-new-box" color="white"/>部屋作る</v-btn>
       </v-col>
       <v-col cols="1">
         <v-btn
@@ -42,7 +42,7 @@
           color="black"
           :disabled="joinRoom"
           class="border"
-        ><v-icon icon="mdi-door-open" color="white"/>入室する</v-btn>
+        ><v-icon icon="mdi-door-open" color="white"/>入室</v-btn>
         </v-col>
       <v-col cols="1">
         <span class="custom-text">参加人数: {{ playerNum }}</span>
@@ -193,7 +193,7 @@
         :key="index"
         class="pa-0"
       >
-      <v-row><span class="custom-text">{{ user.name }}</span></v-row>
+      <v-row class="py-2"><span class="custom-text">{{ user.name }}</span></v-row>
       <v-row>
         <v-col cols="6">
           <other-card-place
@@ -1022,7 +1022,7 @@ export default {
         return 2
       } else if(7 <= point && point <= 14) {
         return 3
-      } else if(point <= 15) {
+      } else if(15 <= point) {
         return 4
       }
     },
