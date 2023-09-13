@@ -16,10 +16,11 @@ export default {
   props: {
     selectedCard: { type: Object },
     deckCards: { type: Object },
+    canvasWidth: { type: Number }
   },
   data() {
     return {
-      canvaz: null,
+      canvaz: null
     };
   },
   mounted() {
@@ -48,7 +49,13 @@ export default {
           this.canvaz.add(rect);
         }
       }
-      // this._drawCard()
+    },
+    resize () {
+      const zoomFactor = this.canvasWidth / (CARD_SIZE.X * 5)
+      this.canvaz.setZoom(zoomFactor)
+      this.canvaz.setWidth(CARD_SIZE.X * 5 * zoomFactor)
+      this.canvaz.setHeight(CARD_SIZE.Y * 2 * zoomFactor)
+      this.canvaz.renderAll()
     },
     /**
      * カード置き場にカード描画：sample
@@ -175,7 +182,7 @@ export default {
      */
     getRandomInt(max) {
       return Math.floor(Math.random() * (max + 1));
-    },
+    }
   },
 };
 </script>

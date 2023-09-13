@@ -14,7 +14,8 @@ export default {
   props: {
     canvasName: { type: String , require: true},
     // 他プレイヤーのカード
-    cards: { type: Array }
+    cards: { type: Array },
+    canvasWidth: { type: Number}
   },
   data () {
     return {
@@ -60,6 +61,13 @@ export default {
           this.canvaz.add(rect)
         }
       }
+    },
+    resize () {
+      const zoomFactor = this.canvasWidth / (CARD_SIZE.X * 5)
+      this.canvaz.setZoom(zoomFactor)
+      this.canvaz.setWidth(CARD_SIZE.X * 3 * zoomFactor)
+      this.canvaz.setHeight(CARD_SIZE.Y * 3 * zoomFactor)
+      this.canvaz.renderAll()
     },
     /**
      * 他プレイヤーのカード描画

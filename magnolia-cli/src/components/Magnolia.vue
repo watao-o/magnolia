@@ -165,7 +165,7 @@
     </v-snackbar>
     <v-row>
       <!-- カード置き場 -->
-      <v-col cols="6">
+      <v-col cols="6" class="place-canvas-col">
         <card-place
           ref="cardPlace"
           :selectedCard="selectedCard"
@@ -173,6 +173,7 @@
           :deckCards="deckCards"
           :status="status"
           :addCards="addCards"
+          :canvasWidth="placeCanvasWidth"
           @openSnackbar="openSnackbar($event)"
           @removeHnadCard="removeHnadCard()"
           @endPhase="endPhase()"
@@ -180,11 +181,12 @@
         />
       </v-col>
       <!-- 手札置き場 -->
-      <v-col cols="6">
+      <v-col cols="6" class="hand-canvas-col">
         <v-row>
           <hand-card
             ref="handCard"
             :deckCards="deckCards"
+            :canvasWidth="handCanvasWidth"
             @updateSelectedCard="updateSelectedCard($event)"
             @removeDeckCards="removeDeckCards($event)"
             :selectedCard="selectedCard"
@@ -252,6 +254,7 @@
               :ref="index"
               :canvasName="user.name"
               :cards="user.cards"
+              :canvasWidth="placeCanvasWidth"
             />
           </v-col>
         </v-row>
@@ -394,6 +397,8 @@ export default {
       roomId: "",
       message: "",
       room: {},
+      handCanvasWidth: 1000,
+      placeCanvasWidth: 1000
     };
   },
   created() {
@@ -535,6 +540,16 @@ export default {
       // 結果通知ダイアログを開く
       this.$refs.resultDialog.openDialog();
     });
+    // ウィンドウサイズ変更イベント
+    window.addEventListener('resize', () => {
+      // 手札エリアの幅
+      this.handCanvasWidth = document.querySelector('.hand-canvas-col').clientWidth * 0.8
+      // 配置カードエリアの幅
+      this.placeCanvasWidth = document.querySelector('.place-canvas-col').clientWidth * 0.8
+      this.$refs.handCard.resize()
+      this.$refs.cardPlace.resize()
+      this.$refs.otherCardPlace.resize()
+    })
   },
   methods: {
     /**

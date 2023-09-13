@@ -177,8 +177,8 @@ export const POINT = {
 
 export const GRID_SIZE = 30
 export const CARD_SIZE = {
-  X: 150,
-  Y: 210
+  X: 180,
+  Y: 250
 }
 
 // エルフの射手のユニットID

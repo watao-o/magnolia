@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="" style="width:600px;">
+    <div class="" style="width:auto;">
       <!-- <canvas id="cardCanvas" class="border"/> -->
       <canvas :id="canvasName" class="border"/>
     </div>
@@ -20,7 +20,8 @@ export default {
     cardImgList: { type:Array },
     canvasName: { type: String , require: true},
     status: { type: Object },
-    addCards: { type: Object }
+    addCards: { type: Object },
+    canvasWidth: { type: Number }
   },
   // mixins: [utils],
   data () {
@@ -73,6 +74,13 @@ export default {
           this.setClickEvent(rect)
         }
       }
+    },
+    resize () {
+      const zoomFactor = this.canvasWidth / (CARD_SIZE.X * 5)
+      this.canvaz.setZoom(zoomFactor)
+      this.canvaz.setWidth(CARD_SIZE.X * 5 * zoomFactor)
+      this.canvaz.setHeight(CARD_SIZE.Y * 5 * zoomFactor)
+      this.canvaz.renderAll()
     },
     /**
      * イベントリスナー
