@@ -258,6 +258,16 @@ export default {
       }
     },
     /**
+     * undo
+     */
+     undo (addCards) {
+      const ac = addCards[0]
+      const undoImg = this._getImgObjList().find(img => img.posX === ac.posX && img.posY === ac.posY)
+      this.canvaz.remove(undoImg)
+      this.canvaz.renderAll()
+      this.installCount = 0
+    },
+    /**
      * 0~maxのランダムの整数取得
      */
      getRandomInt(max) {
