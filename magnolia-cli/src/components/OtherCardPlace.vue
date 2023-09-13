@@ -61,6 +61,10 @@ export default {
           this.canvaz.add(rect)
         }
       }
+      // ウィンドウサイズ変更イベント
+      window.addEventListener('resize', () => {
+        this.resize()
+      })
     },
     resize () {
       const zoomFactor = this.canvasWidth / (CARD_SIZE.X * 5)

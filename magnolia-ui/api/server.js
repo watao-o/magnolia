@@ -108,8 +108,10 @@ io.on("connection", (socket) => {
       // ルームに参加
       socket.join(room.id);
       // 他プレイヤーに参加を通知
-      socket.broadcast.emit('announceEnter', userName, room.users.length, room)
-      io.to(socket.id).emit("updateRoom", room, room.users.length);
+      // socket.broadcast.emit('announceEnter', userName, room.users.length, room)
+      // io.to(socket.id).broadcastemit('announceEnter', userName, room.users.length, room);
+      io.to(room.id).emit('announceEnter', userName, room.users.length, room);
+      io.to(room.id).emit("updateRoom", room, room.users.length);
     });
       // ゲーム開始
   socket.on('gameStart', (roomId) => {
@@ -121,13 +123,16 @@ io.on("connection", (socket) => {
     // }
     const room = rooms.find(r => r.id == roomId)
     room.gameStart = true
-    socket.broadcast.emit('announceStart')
-    socket.emit('announceStart')
+    // socket.broadcast.emit('announceStart')
+    // socket.emit('announceStart')
+    io.to(room.id).emit('announceStart')
   })
   // 山札からカードを除外
-  socket.on('removeDeckCards', (removeCards) => {
+  socket.on('removeDeckCards', (removeCards, roomId) => {
+    const room = rooms.find(r => r.id == roomId)
     // console.log('除外カード', removeCards)
-    socket.broadcast.emit('removeDeckCardsOther', removeCards)
+    // socket.broadcast.emit('removeDeckCardsOther', removeCards)
+    io.to(room.id).emit('removeDeckCardsOther', removeCards)
   })
   // 配置フェーズ終了
   socket.on('endConfigPhase', (roomId) => {
@@ -145,15 +150,18 @@ io.on("connection", (socket) => {
     user.configEnd = true
     // console.log(room.users)
     // 自分以外のプレイヤーに通知
-    socket.broadcast.emit('announceEndPhase', user.name)
+    // socket.broadcast.emit('announceEndPhase', user.name)
+    io.to(room.id).emit('announceEndPhase', user.name)
     // 全員配置フェーズを終了していたら、次のフェーズへ
     // (configEndがfalseのユーザがいる場合trueなので反転）
     if (!room.users.find(user => !user.configEnd)) {
       console.log('★次フェーズへ')
       // 他プレイヤーの処理開始
-      socket.broadcast.emit('startRound')
+      // socket.broadcast.emit('startRound')
       // 自分の処理開始
-      socket.emit('startRound')
+      // socket.emit('startRound')
+      // 開始通知
+      io.to(room.id).emit("startRound")
       // ターン終了フラグをfalseに戻す
       room.users.forEach(u => {
         u.configEnd = false
@@ -189,7 +197,8 @@ io.on("connection", (socket) => {
     if (user) {
       user.status = status
       // 他ユーザにステータスを送信
-      socket.broadcast.emit('updateStatus', userName, user)
+      // socket.broadcast.emit('updateStatus', userName, user)
+      io.to(room.id).emit('updateStatus', userName, user)
     } else {
       return
     }

@@ -264,43 +264,36 @@
     <phase-dialog
       ref="announceDialog"
       :nextPhase="() => {}"
-      @closeDialog="closeDialog()"
     />
     <!-- ゲーム開始通知ダイアログ -->
     <phase-dialog
       ref="startDialog"
       :nextPhase="putPhase"
-      @closeDialog="closeDialog()"
     />
     <!-- ドローフェイズダイアログ -->
     <phase-dialog
       ref="putPhaseDialog"
       :nextPhase="() => {}"
-      @closeDialog="closeDialog()"
     />
     <!-- 戦争フェイズダイアログ -->
     <phase-dialog
       ref="warPhaseDialog"
       :nextPhase="developPhase"
-      @closeDialog="closeDialog()"
     />
     <!-- 発展フェイズダイアログ -->
     <phase-dialog
       ref="developPhaseDialog"
       :nextPhase="incomePhase"
-      @closeDialog="closeDialog()"
     />
     <!-- 収入フェイズダイアログ -->
     <phase-dialog
       ref="incomePhaseDialog"
       :nextPhase="vpPhase"
-      @closeDialog="closeDialog()"
     />
     <!-- VPフェイズダイアログ -->
     <phase-dialog
       ref="vpPhaseDialog"
       :nextPhase="putPhase"
-      @closeDialog="closeDialog()"
     />
     <!-- 待機ダイアログ -->
     <wait-dialog ref="waitDialog" />
@@ -353,10 +346,10 @@ export default {
       endGame: false,
       vpCanvas: null,
       warCanvas: null,
-      // socket: io('http://localhost:3030'),
-      socket: io("https://magnolia-kkgc.onrender.com/", {
-        transports: ["websocket"], // skip hppt polling
-      }),
+      socket: io('http://localhost:3000'),
+      // socket: io("https://magnolia-kkgc.onrender.com/", {
+      //   transports: ["websocket"], // skip hppt polling
+      // }),
       selectedCard: {},
       // 山札カード
       deckCards: [],
@@ -548,7 +541,6 @@ export default {
       this.placeCanvasWidth = document.querySelector('.place-canvas-col').clientWidth * 0.8
       this.$refs.handCard.resize()
       this.$refs.cardPlace.resize()
-      this.$refs.otherCardPlace.resize()
     })
   },
   methods: {
@@ -608,7 +600,7 @@ export default {
     removeDeckCards(removeCards) {
       this.removeDeck(removeCards);
       // 他プレイヤーの山札からも除外する
-      this.socket.emit("removeDeckCards", removeCards);
+      this.socket.emit("removeDeckCards", removeCards, this.roomId);
     },
     removeDeck(removeCards) {
       removeCards.forEach((rc) => {
