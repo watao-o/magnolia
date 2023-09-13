@@ -346,10 +346,10 @@ export default {
       endGame: false,
       vpCanvas: null,
       warCanvas: null,
-      socket: io('http://localhost:3000'),
-      // socket: io("https://magnolia-kkgc.onrender.com/", {
-      //   transports: ["websocket"], // skip hppt polling
-      // }),
+      // socket: io('http://localhost:3000'),
+      socket: io("https://magnolia-kkgc.onrender.com/", {
+        transports: ["websocket"], // skip hppt polling
+      }),
       selectedCard: {},
       // 山札カード
       deckCards: [],
