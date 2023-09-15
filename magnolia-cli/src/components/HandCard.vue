@@ -29,8 +29,9 @@ export default {
   methods: {
     init() {
       this.canvaz = new fabric.Canvas("handCanvas");
-      this.canvaz.setWidth(CARD_SIZE.X * 5);
-      this.canvaz.setHeight(CARD_SIZE.Y * 2);
+      this.resize()
+      // this.canvaz.setWidth(CARD_SIZE.X * 5);
+      // this.canvaz.setHeight(CARD_SIZE.Y * 2);
 
       const x = 5;
       const y = 2;
@@ -55,7 +56,15 @@ export default {
       this.canvaz.setZoom(zoomFactor)
       this.canvaz.setWidth(CARD_SIZE.X * 5 * zoomFactor)
       this.canvaz.setHeight(CARD_SIZE.Y * 2 * zoomFactor)
+      const imgs = this.canvaz.getObjects().filter((obj) => obj.type === "image");
+      imgs.forEach(img => {
+        this.canvaz.remove(img);
+      });
+      imgs.forEach(img => {
+        this.canvaz.add(img);
+      });
       this.canvaz.renderAll()
+
     },
     /**
      * カード置き場にカード描画：sample

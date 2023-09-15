@@ -50,8 +50,9 @@ export default {
     init () {
       // this.canvaz = new fabric.Canvas('cardCanvas')
       this.canvaz = new fabric.Canvas(this.canvasName)
-      this.canvaz.setWidth(CARD_SIZE.X * 5)
-      this.canvaz.setHeight(CARD_SIZE.Y * 5)
+      this.resize()
+      // this.canvaz.setWidth(CARD_SIZE.X * 5)
+      // this.canvaz.setHeight(CARD_SIZE.Y * 5)
 
       this.canvaz.selectable = false
       const x = 5

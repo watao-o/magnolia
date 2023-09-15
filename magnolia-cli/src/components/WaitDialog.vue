@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   name: 'waitDialog',
   props: {
@@ -26,7 +28,8 @@ export default {
     }
   },
   methods: {
-    openDialog() {
+    openDialog(msg) {
+      if (!_.isEmpty(msg)) this.dialogMsg = msg
       this.showFlg = true
     },
     closeDialog(){

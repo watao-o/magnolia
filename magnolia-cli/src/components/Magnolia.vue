@@ -224,9 +224,18 @@
           </v-col>
           <v-col cols="6">
             <v-btn
-              :color="trashFlg || !playGame || $refs.cardPlace.installCount === 0 ? 'grey' : 'primary'"
+              :color="
+                trashFlg || !playGame || $refs.cardPlace.installCount === 0
+                  ? 'grey'
+                  : 'primary'
+              "
               @click="undo"
-              :disabled="trashFlg || !playGame || endGame || $refs.cardPlace.installCount === 0"
+              :disabled="
+                trashFlg ||
+                !playGame ||
+                endGame ||
+                $refs.cardPlace.installCount === 0
+              "
               class="border"
               ><v-icon icon="mdi-send" />UNDO</v-btn
             >
@@ -261,40 +270,19 @@
       </v-list-item>
     </v-list>
     <!-- 通知専用ダイアログ -->
-    <phase-dialog
-      ref="announceDialog"
-      :nextPhase="() => {}"
-    />
+    <phase-dialog ref="announceDialog" :nextPhase="() => {}" />
     <!-- ゲーム開始通知ダイアログ -->
-    <phase-dialog
-      ref="startDialog"
-      :nextPhase="putPhase"
-    />
+    <phase-dialog ref="startDialog" :nextPhase="putPhase" />
     <!-- ドローフェイズダイアログ -->
-    <phase-dialog
-      ref="putPhaseDialog"
-      :nextPhase="() => {}"
-    />
+    <phase-dialog ref="putPhaseDialog" :nextPhase="() => {}" />
     <!-- 戦争フェイズダイアログ -->
-    <phase-dialog
-      ref="warPhaseDialog"
-      :nextPhase="developPhase"
-    />
+    <phase-dialog ref="warPhaseDialog" :nextPhase="developPhase" />
     <!-- 発展フェイズダイアログ -->
-    <phase-dialog
-      ref="developPhaseDialog"
-      :nextPhase="incomePhase"
-    />
+    <phase-dialog ref="developPhaseDialog" :nextPhase="incomePhase" />
     <!-- 収入フェイズダイアログ -->
-    <phase-dialog
-      ref="incomePhaseDialog"
-      :nextPhase="vpPhase"
-    />
+    <phase-dialog ref="incomePhaseDialog" :nextPhase="vpPhase" />
     <!-- VPフェイズダイアログ -->
-    <phase-dialog
-      ref="vpPhaseDialog"
-      :nextPhase="putPhase"
-    />
+    <phase-dialog ref="vpPhaseDialog" :nextPhase="putPhase" />
     <!-- 待機ダイアログ -->
     <wait-dialog ref="waitDialog" />
     <!-- ゲーム終了結果通知 -->
@@ -391,12 +379,13 @@ export default {
       message: "",
       room: {},
       handCanvasWidth: 1000,
-      placeCanvasWidth: 1000
+      placeCanvasWidth: 1000,
     };
   },
   created() {
     this.socket.on("connect", () => {
       console.log("connected");
+      this.$refs.waitDialog.closeDialog();
     });
     this.socket.on("error", (error) => {
       console.log("Connection Error:", error);
@@ -428,6 +417,8 @@ export default {
     },
   },
   mounted() {
+    // 接続完了まで待機
+    this.$refs.waitDialog.openDialog("＞＞＞接続中です＞＞＞");
     // ルーム情報更新
     this.socket.on("updateRoom", (room, playerNum) => {
       this.$refs.announceDialog.openDialog("入室に成功しました！！");
@@ -534,14 +525,16 @@ export default {
       this.$refs.resultDialog.openDialog();
     });
     // ウィンドウサイズ変更イベント
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       // 手札エリアの幅
-      this.handCanvasWidth = document.querySelector('.hand-canvas-col').clientWidth * 0.8
+      this.handCanvasWidth =
+        document.querySelector(".hand-canvas-col").clientWidth * 0.8;
       // 配置カードエリアの幅
-      this.placeCanvasWidth = document.querySelector('.place-canvas-col').clientWidth * 0.8
-      this.$refs.handCard.resize()
-      this.$refs.cardPlace.resize()
-    })
+      this.placeCanvasWidth =
+        document.querySelector(".place-canvas-col").clientWidth * 0.8;
+      this.$refs.handCard.resize();
+      this.$refs.cardPlace.resize();
+    });
   },
   methods: {
     /**
@@ -663,10 +656,10 @@ export default {
     /**
      * undo
      */
-    undo () {
-      this.$refs.cardPlace.undo(this.addCards)
-      this.$refs.handCard.undo(this.addCards)
-      this.addCards = []
+    undo() {
+      this.$refs.cardPlace.undo(this.addCards);
+      this.$refs.handCard.undo(this.addCards);
+      this.addCards = [];
     },
     /**
      * 配置フェイズ終了処理
