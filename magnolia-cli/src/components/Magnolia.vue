@@ -552,7 +552,6 @@ export default {
      * 初期化処理
      */
     init() {
-      // console.log('jsonデータ', CardData)
       let serialNum = 1;
       CardData.unitList.forEach((unit) => {
         // カードの枚数だけ追加
@@ -565,7 +564,6 @@ export default {
           serialNum++;
         }
       });
-      console.log(this.deckCards)
       // カード山札を作成
       // this.deckCards
     },
@@ -663,7 +661,7 @@ export default {
 
       // 他のプレイヤーを待つ
       this.socket.emit("endConfigPhase", this.roomId);
-      this.$refs.waitDialog.openDialog();
+      this.$refs.waitDialog.openDialog('他のプレイヤーを待っています。。。');
     },
     /**
      * 配置フェーズ処理
@@ -683,8 +681,6 @@ export default {
 
       // 設置済みカードに追加
       this.existCardList = [...this.existCardList, ...this.addCards];
-      // console.log(this.addCards)
-      // console.log(this.existCardList)
       // 配置効果の発動
       console.log("配置効果発動前:", JSON.stringify(this.status));
       // 配置フェーズに効果があるカードを取得
@@ -959,11 +955,9 @@ export default {
      */
     developPhase() {
       console.log("■■■■■■■発展■■■■■■■");
-      // ダイアログ表示
-      this.$refs.developPhaseDialog.openDialog(
-        "発展フェーズです\r\n技術・信仰をupします"
-      );
-      console.log("発展前 技術:", this.status.tech, "信仰:", this.status.faith);
+      const beforeTech = this.status.tech
+      const beforeFaith = this.status.faith
+      console.log("発展前 技術:", beforeTech, "信仰:", beforeFaith);
       // 収入フェーズに効果があるカードを取得
       this.existCardList.forEach((unit) => {
         // スキル１の処理
@@ -972,18 +966,21 @@ export default {
         this._handleSkill(unit.skillId2, PHASE.DEVELOP)
       });
       console.log("発展後 技術:", this.status.tech, "信仰:", this.status.faith);
+      // ダイアログ表示
+      this.$refs.developPhaseDialog.openDialog(
+        "発展フェーズです\r\n技術・信仰をupします\r\n" +
+        "発展前 技術：" + beforeTech + ", 信仰：" + beforeFaith + "\r\n" +
+        "発展後 技術：" + this.status.tech + ", 信仰：" + this.status.faith
+      );
     },
     /**
      * 収入フェーズ処理
      */
     incomePhase() {
       console.log("■■■■■■■収入■■■■■■■");
-      // ダイアログ表示
-      this.$refs.incomePhaseDialog.openDialog(
-        "収入フェーズです\r\nお金が手に入ります"
-      );
+      const beforeMoney = this.status.money
       // 収入計算
-      console.log("お金もらう前:", this.status.money);
+      console.log("お金もらう前:", beforeMoney);
       // ベース収入取得
       this.status.money += 3
       console.log("お金もらった後（ベース収入）:", this.status.money);
@@ -997,16 +994,21 @@ export default {
         this._handleSkill(unit.skillId2, PHASE.INCOM)
       });
       console.log("お金もらった後（追加収入）:", this.status.money);
+      // ダイアログ表示
+      this.$refs.incomePhaseDialog.openDialog(
+        "収入フェーズです\r\nお金が手に入ります\r\n" +
+        "収入獲得前 お金：" + beforeMoney + "\r\n" +
+        "収入獲得後 お金：" + this.status.money + "\r\n"
+      );
     },
     /**
      * VPフェーズ処理
      */
     vpPhase() {
       console.log("■■■■■■■VP■■■■■■■");
-      // ダイアログ表示
-      this.$refs.vpPhaseDialog.openDialog("VPフェーズです\r\nVPが手に入ります");
       // VP計算
       let addVP = 0;
+      const beforeVp = this.status.vp
       // VPフェーズに効果があるカードを取得
       this.existCardList.forEach((unit) => {
         // スキル１の処理
@@ -1014,10 +1016,17 @@ export default {
         // スキル２の処理
         addVP += this.addVP(unit.skillId2)
       });
-      console.log("vpもらう前:", this.status.vp);
+      console.log("vpもらう前:", beforeVp);
       // VPに追加
       this.status.vp += addVP;
       console.log("vpもらった後:", this.status.vp);
+
+      // ダイアログ表示
+      this.$refs.vpPhaseDialog.openDialog(
+        "VPフェーズです\r\nVPが手に入ります\r\n" +
+        "VP獲得前 VP：" + beforeVp + "\r\n" +
+        "VP獲得後 VP：" + this.status.vp + "\r\n"
+      );
       // 終了条件判定
       if (this.status.vp >= 40 || this.existCardList.length >= 9) {
         console.log("ゲーム終了");
