@@ -181,7 +181,7 @@ io.on("connection", (socket) => {
       room.users.forEach(myu => {
         console.log('戦力  ', myu.name, ':', myu.status.force)
         myu.rank = room.users.filter(u => u.status.force > myu.status.force).length + 1
-        myu.emdWar = false
+        myu.endWar = false
       })
       // 順位を返却して終了
       io.to(room.id).emit("endWarPhase", room)
