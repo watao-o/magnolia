@@ -276,7 +276,9 @@
     <!-- ドローフェイズダイアログ -->
     <phase-dialog ref="putPhaseDialog" :nextPhase="() => {}" />
     <!-- 戦争フェイズダイアログ -->
-    <phase-dialog ref="warPhaseDialog" :nextPhase="developPhase" />
+    <phase-dialog ref="warPhaseDialog" :nextPhase="() => {}" />
+    <!-- 戦争終了ダイアログ -->
+    <phase-dialog ref="endWarPhaseDialog" :nextPhase="developPhase" />
     <!-- 発展フェイズダイアログ -->
     <phase-dialog ref="developPhaseDialog" :nextPhase="incomePhase" />
     <!-- 収入フェイズダイアログ -->
@@ -493,7 +495,8 @@ export default {
       const myUser = room.users.find((u) => u.name === this.userName);
       console.log("■■■■■■戦争■■■■■■■■");
       console.log("順位:", myUser.rank);
-      console.log("vp獲得前:", this.status.vp);
+      const beforeVp = this.status.vp
+      console.log("vp獲得前:", beforeVp);
       // 戦争勝利vpを計算
       const getWarVp = this.getWarVp(myUser.rank);
       this.status.vp += getWarVp;
@@ -508,6 +511,11 @@ export default {
         this.addWarVp(ec.skillId2,getWarVp)
       });
       console.log("vp追加獲得後:", this.status.vp);
+      this.$refs.endWarPhaseDialog.openDialog(
+        "戦争フェーズ終了です\r\n" +
+        "戦争vp獲得前: " + beforeVp + "\r\n" +
+        "戦争vp獲得後: " + this.status.vp
+      )
     });
 
     this.socket.on("announceEndGame", (room) => {
@@ -822,10 +830,10 @@ export default {
      * 戦争フェーズ処理
      */
     warPhase() {
-      // ダイアログ表示
-      this.$refs.warPhaseDialog.openDialog(
-        "戦争フェーズです\r\n戦力を計算します"
-      );
+      // // ダイアログ表示
+      // this.$refs.warPhaseDialog.openDialog(
+      //   "戦争フェーズです\r\n戦力を計算します"
+      // );
       console.log('■■■■■■戦力計算■■■■■■■■')
       // 戦力を計算
       let force = 0;
@@ -846,6 +854,11 @@ export default {
       console.log('スキル発動後戦力：', force)
       this.status.force = force;
       // console.log("warPhase呼び出し");
+      // ダイアログ表示
+      this.$refs.warPhaseDialog.openDialog(
+        "戦争フェーズです\r\n戦力を計算します\r\n" +
+        "戦力： " + this.status.force
+      );
       // エルフの射手が設置済みかつ前線に存在しない場合、戦力を追加
       this.elvenArcher(frontUits);
       // 待機ダイアログを開く
@@ -859,7 +872,7 @@ export default {
           this.userName,
           this.existCardList
         );
-      }, 500);
+      }, 2000);
     },
     /**
      * 前線ユニット取得
@@ -1033,7 +1046,7 @@ export default {
         // 遅延を挟んで他ユーザに通知
         setTimeout(() => {
           this.socket.emit("endGame", this.roomId);
-        }, 500);
+        }, 1000);
         return;
       }
     },

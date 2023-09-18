@@ -34,7 +34,7 @@ export default {
       setTimeout(() => {
         this.showFlg = false;
         this.nextPhase()
-      }, 3500);
+      }, 2500);
     }
   }
 }
