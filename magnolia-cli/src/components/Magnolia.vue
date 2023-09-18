@@ -970,33 +970,11 @@ export default {
       // 収入フェーズに効果があるカードを取得
       this.existCardList.forEach((unit) => {
         // スキル１の処理
-        const skill1 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId1
-        );
-        this.addDevelop(skill1);
+        this._handleSkill(unit.skillId1, PHASE.DEVELOP)
         // スキル２の処理
-        const skill2 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId2
-        );
-        this.addDevelop(skill2);
+        this._handleSkill(unit.skillId2, PHASE.DEVELOP)
       });
       console.log("発展後 技術:", this.status.tech, "信仰:", this.status.faith);
-    },
-    /**
-     * 発展計算
-     * @param {Object} skill スキル
-     */
-    addDevelop(skill) {
-      if (!_.isEmpty(skill) && skill.activePhase === PHASE.DEVELOP) {
-        switch (skill.effectTarget) {
-          case TARGET.TECH:
-            this.status.tech += skill.effectValue;
-            break;
-          case TARGET.FAITH:
-            this.status.faith += skill.effectValue;
-            break;
-        }
-      }
     },
     /**
      * 収入フェーズ処理
@@ -1008,45 +986,20 @@ export default {
         "収入フェーズです\r\nお金が手に入ります"
       );
       // 収入計算
-      let income = 3;
-      // 収入フェーズに効果があるカードを取得
+      console.log("お金もらう前:", this.status.money);
+      // ベース収入取得
+      this.status.money += 3
+      console.log("お金もらった後（ベース収入）:", this.status.money);
+      // お金に追加
+
+      // 収入フェーズに効果があるカードの処理
       this.existCardList.forEach((unit) => {
         // スキル１の処理
-        const skill1 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId1
-        );
-        income += this.addIncome(skill1);
+        this._handleSkill(unit.skillId1, PHASE.INCOM)
         // スキル２の処理
-        const skill2 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId2
-        );
-        income += this.addIncome(skill2);
+        this._handleSkill(unit.skillId2, PHASE.INCOM)
       });
-      // お金に追加
-      console.log("お金もらう前:", this.status.money);
-      this.status.money += income;
-      console.log("お金もらった後:", this.status.money);
-    },
-    /**
-     * 収入計算
-     * @param {Object} skill スキル
-     * @returns 追加収入
-     */
-    addIncome(skill) {
-      if (!_.isEmpty(skill) && skill.activePhase === PHASE.INCOM) {
-        // 技術レベルバフ
-        if (
-          !_.isEmpty(skill.synergyTarget) &&
-          skill.synergyTarget === SYNERGY.TECH_LEVEL
-        ) {
-          return skill.effectValue * this._getLevel(this.status.tech);
-        } else {
-          // バフなし固定値
-          return skill.effectValue;
-        }
-      } else {
-        return 0;
-      }
+      console.log("お金もらった後（追加収入）:", this.status.money);
     },
     /**
      * VPフェーズ処理
@@ -1135,6 +1088,41 @@ export default {
     closeDialog() {
       // 手札補充
       this.$refs.handCard.reloadCard();
+    },
+    /**
+     * スキル処理
+     * @param { String } skillId スキルID
+     * @param { String } phase フェーズ
+     */
+    _handleSkill (skillId, phase) {
+      // スキルの取得
+      const skill = this.cardData.skillList.find(
+          (skill) => skill.skillId === skillId
+      );
+      console.log('スキル', skill)
+      console.log('スキル処理有無: ',!_.isEmpty(skill) && skill.activePhase === phase)
+      // フェーズが一致する場合、
+      if (!_.isEmpty(skill) && skill.activePhase === phase) {
+        switch (skill.effectTarget) {
+          // 技術点の追加
+          case TARGET.TECH:
+            this.status.tech += skill.effectValue;
+            break;
+          // 信仰点の追加
+          case TARGET.FAITH:
+            this.status.faith += skill.effectValue;
+            break;
+          // お金の追加
+          case TARGET.MONEY:
+            // 技術レベルバフ
+            if (!_.isEmpty(skill.synergyTarget) && skill.synergyTarget === SYNERGY.TECH_LEVEL) {
+              this.status.money += skill.effectValue * this._getLevel(this.status.tech);
+            // バフなし固定値
+            } else {
+              this.status.money += skill.effectValue;
+            }
+        }
+      }
     },
     /**
      * 技術レベル・信仰レベル産出
