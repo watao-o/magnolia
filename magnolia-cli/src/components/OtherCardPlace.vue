@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="" style="width:auto;">>
+    <div class="" style="width:auto;">
       <canvas :id="canvasName" class="border"/>
     </div>
   </v-container>

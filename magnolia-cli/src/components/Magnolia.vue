@@ -497,23 +497,15 @@ export default {
       // 戦争勝利vpを計算
       const getWarVp = this.getWarVp(myUser.rank);
       this.status.vp += getWarVp;
+      console.log('獲得VP：', getWarVp)
       console.log("vp獲得後:", this.status.vp);
       this.snackbar = true;
       this.message = "獲得VP:" + getWarVp;
       // vp追加効果があるカードがあれば追加
       this.existCardList.forEach((ec) => {
-        this.addWarVp(
-          this.cardData.skillList.find(
-            (skill) => skill.skillId === ec.skillId1
-          ),
-          getWarVp
-        );
-        this.addWarVp(
-          this.cardData.skillList.find(
-            (skill) => skill.skillId === ec.skillId12
-          ),
-          getWarVp
-        );
+        // スキル１の処理
+        this.addWarVp(ec.skillId1,getWarVp)
+        this.addWarVp(ec.skillId2,getWarVp)
       });
       console.log("vp追加獲得後:", this.status.vp);
     });
@@ -573,6 +565,7 @@ export default {
           serialNum++;
         }
       });
+      console.log(this.deckCards)
       // カード山札を作成
       // this.deckCards
     },
@@ -837,26 +830,26 @@ export default {
       this.$refs.warPhaseDialog.openDialog(
         "戦争フェーズです\r\n戦力を計算します"
       );
+      console.log('■■■■■■戦力計算■■■■■■■■')
       // 戦力を計算
       let force = 0;
       // 前線のユニットを取得
       const frontUits = this._getFrontUnits();
+      // 純粋な戦力
       frontUits.forEach((unit) => {
-        // 前線ユニットの戦力を足し算
         force += unit.force;
-        // スキル１の処理
-        const skill1 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId1
-        );
-        force += this._addForce(skill1);
-        // スキル２の処理
-        const skill2 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId2
-        );
-        force += this._addForce(skill2);
       });
+      console.log('スキル発動前戦力：', force)
+      // スキル効果を追加
+      frontUits.forEach((unit) => {
+        // スキル１の処理
+        force += this._addForce(unit.skillId1)
+        // スキル２の処理
+        force += this._addForce(unit.skillId2)
+      });
+      console.log('スキル発動後戦力：', force)
       this.status.force = force;
-      console.log("warPhase呼び出し");
+      // console.log("warPhase呼び出し");
       // エルフの射手が設置済みかつ前線に存在しない場合、戦力を追加
       this.elvenArcher(frontUits);
       // 待機ダイアログを開く
@@ -894,7 +887,9 @@ export default {
     /**
      * 戦力追加処理
      */
-    _addForce(skill) {
+    _addForce(skillId) {
+      // スキルの取得
+      const skill = this.cardData.skillList.find((skill) => skill.skillId === skillId);
       let addForce = 0;
       if (!_.isEmpty(skill) && skill.activePhase === PHASE.WAR) {
         switch (skill.synergyTarget) {
@@ -943,7 +938,8 @@ export default {
     /**
      * 戦争追加点処理
      */
-    addWarVp(skill, addVp) {
+    addWarVp(skillId, addVp) {
+      const skill = this.cardData.skillList.find((skill) => skill.skillId === skillId);
       if (!_.isEmpty(skill) && skill.activePhase === PHASE.AFTER_WAR) {
         // 戦争でVPを得たなら
         if (addVp > 0 && skill.effectTarget === TARGET.GET_WAR_VP) {
@@ -953,6 +949,7 @@ export default {
           addVp === 0 &&
           skill.effectTarget === TARGET.NOT_GET_WAR_VP
         ) {
+          console.log('★人間の葬儀屋発動')
           this.status.vp += skill.effectValue;
         }
       }
@@ -1013,15 +1010,9 @@ export default {
       // VPフェーズに効果があるカードを取得
       this.existCardList.forEach((unit) => {
         // スキル１の処理
-        const skill1 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId1
-        );
-        addVP += this.addVP(skill1);
+        addVP += this.addVP(unit.skillId1)
         // スキル２の処理
-        const skill2 = this.cardData.skillList.find(
-          (skill) => skill.skillId === unit.skillId2
-        );
-        addVP += this.addVP(skill2);
+        addVP += this.addVP(unit.skillId2)
       });
       console.log("vpもらう前:", this.status.vp);
       // VPに追加
@@ -1040,18 +1031,15 @@ export default {
     /**
      * VP計算処理
      */
-    addVP(skill) {
+    addVP(skillId) {
+      // スキル１の処理
+      const skill = this.cardData.skillList.find((skill) => skill.skillId === skillId);
+
       if (!_.isEmpty(skill) && skill.activePhase === PHASE.VP) {
         let addVp = 0;
-        const under3CostUnits = this.existCardList.filter(
-          (card) => card.cost <= 3
-        );
-        const upper4CostUnits = this.existCardList.filter(
-          (card) => card.cost >= 4
-        );
-        const upper4ForceUnits = this.existCardList.filter(
-          (card) => card.force >= 4
-        );
+        const under3CostUnits = this.existCardList.filter((card) => card.cost <= 3);
+        const upper4CostUnits = this.existCardList.filter((card) => card.cost >= 4);
+        const upper4ForceUnits = this.existCardList.filter((card) => card.force >= 4);
         switch (skill.synergyTarget) {
           // 技術レベル
           case SYNERGY.TECH_LEVEL:
@@ -1096,11 +1084,7 @@ export default {
      */
     _handleSkill (skillId, phase) {
       // スキルの取得
-      const skill = this.cardData.skillList.find(
-          (skill) => skill.skillId === skillId
-      );
-      console.log('スキル', skill)
-      console.log('スキル処理有無: ',!_.isEmpty(skill) && skill.activePhase === phase)
+      const skill = this.cardData.skillList.find((skill) => skill.skillId === skillId);
       // フェーズが一致する場合、
       if (!_.isEmpty(skill) && skill.activePhase === phase) {
         switch (skill.effectTarget) {
