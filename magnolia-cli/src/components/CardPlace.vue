@@ -17,8 +17,8 @@ export default {
   name: 'cardPlace',
   props: {
     selectedCard: { type: Object },
-    cardImgList: { type:Array },
-    canvasName: { type: String , require: true},
+    cardImgList: { type: Array },
+    canvasName: { type: String, require: true },
     status: { type: Object },
     addCards: { type: Object },
     canvasWidth: { type: Number }
@@ -29,8 +29,8 @@ export default {
       canvaz: null,
       // カード設置回数
       installCount: 0,
-      maxPos: {x: 4, y:4},
-      minPos: {x: 0, y:0}
+      maxPos: { x: 4, y: 4 },
+      minPos: { x: 0, y: 0 }
     }
   },
   mounted () {
@@ -39,11 +39,11 @@ export default {
   watch: {
     // 他プレイヤーのカード情報が更新されたら再描画
     cards: {
-      handler: function(newCards) {
+      handler: function (newCards) {
         // 描画しているものをクリア
         this._drawOtherPlayerCards(newCards)
       },
-      deep : true
+      deep: true
     }
   },
   methods: {
@@ -57,13 +57,13 @@ export default {
       this.canvaz.selectable = false
       const x = 5
       const y = 5
-      for(let i = 0 ; i < x ; i++) {
-        for(let j = 0 ; j < y ; j++) {
+      for (let i = 0; i < x; i++) {
+        for (let j = 0; j < y; j++) {
           const rect = new fabric.Rect({
             left: i * CARD_SIZE.X,
             top: j * CARD_SIZE.Y,
             width: CARD_SIZE.X,
-            height: CARD_SIZE.Y, 
+            height: CARD_SIZE.Y,
             fill: '#2222',
             stroke: 'brack',
             strokeWidth: 1,
@@ -86,7 +86,7 @@ export default {
     /**
      * イベントリスナー
      */
-     setClickEvent (rect) {
+    setClickEvent (rect) {
       // クリック処理
       // カード設置処理
       rect.on('mousedown', () => {
@@ -95,14 +95,14 @@ export default {
           if (this.chkCost()) {
             console.log('お金足りない')
             this.$emit('openSnackbar', 'お金が足りません。')
-            return;
+            return
           }
           // カード設置
-          fabric.Image.fromURL(this.selectedCard.img, (obj) =>  {
-            var oImg = obj.set({ 
-              left: this._approximateNumber(rect.left,CARD_SIZE.X),
-               top: this._approximateNumber(rect.top,CARD_SIZE.Y)
-              })
+          fabric.Image.fromURL(this.selectedCard.img, (obj) => {
+            const oImg = obj.set({
+              left: this._approximateNumber(rect.left, CARD_SIZE.X),
+              top: this._approximateNumber(rect.top, CARD_SIZE.Y)
+            })
             oImg.scaleToWidth(CARD_SIZE.X)
             oImg.selectable = false
             oImg.id = 'card'
@@ -123,7 +123,7 @@ export default {
             posY: rect.top / CARD_SIZE.Y
           }
           // 設置済みカードに追加
-          this.$emit('addExistCardList',selectedCardInfo)
+          this.$emit('addExistCardList', selectedCardInfo)
           // ハイライトを解除
           this._disHighLight()
         }
@@ -146,7 +146,7 @@ export default {
     /**
      * カード縦横３枚設置チェック
      */
-    chkMaxPos(posX, posY) {
+    chkMaxPos (posX, posY) {
       // カードのリストを取得
       const imgList = this._getImgObjList()
       // X軸に３枚並んでるかチェック
@@ -177,8 +177,8 @@ export default {
       if (cardObjs.length === 0) {
         // 中心のrectを取得
         const centerRect = this.canvaz.getObjects().filter(obj => obj.type === 'rect')
-                                                    .find(rect => rect.posX === 2 && rect.posY === 2)
-        centerRect.set({ fill: this._getHighlightFill()})
+          .find(rect => rect.posX === 2 && rect.posY === 2)
+        centerRect.set({ fill: this._getHighlightFill() })
         centerRect.Installable = true
 
         this.canvaz.renderAll()
@@ -194,10 +194,10 @@ export default {
     _getNextCard (cardObj, cardObjs) {
       const cCoords = cardObj.aCoords
       const [cL, cT, cR, cB] = [
-          this._approximateNumber(cCoords.tl.x, CARD_SIZE.X),
-          this._approximateNumber(cCoords.tl.y, CARD_SIZE.Y),
-          this._approximateNumber(cCoords.br.x, CARD_SIZE.X),
-          this._approximateNumber(cCoords.br.y, CARD_SIZE.Y),
+        this._approximateNumber(cCoords.tl.x, CARD_SIZE.X),
+        this._approximateNumber(cCoords.tl.y, CARD_SIZE.Y),
+        this._approximateNumber(cCoords.br.x, CARD_SIZE.X),
+        this._approximateNumber(cCoords.br.y, CARD_SIZE.Y)
       ]
       const rects = this.canvaz.getObjects().filter(obj => obj.type === 'rect')
       rects.forEach(rect => {
@@ -210,7 +210,7 @@ export default {
           this._approximateNumber(rCoords.tl.x, CARD_SIZE.X),
           this._approximateNumber(rCoords.tl.y, CARD_SIZE.Y),
           this._approximateNumber(rCoords.br.x, CARD_SIZE.X),
-          this._approximateNumber(rCoords.br.y, CARD_SIZE.Y),
+          this._approximateNumber(rCoords.br.y, CARD_SIZE.Y)
         ]
         // カードの上
         const conditions1 = cL === rL && cT === rB && yLength < 3
@@ -224,11 +224,11 @@ export default {
         if (conditions1 || conditions2 || conditions3 || conditions4) {
           // 縦、横に３枚設置済みで３×３をはみ出す位置なら除外
           if ((rect.posX < this.minPos.x || this.maxPos.x < rect.posX) ||
-              (rect.posY < this.minPos.y || this.maxPos.y < rect.posY)){
+              (rect.posY < this.minPos.y || this.maxPos.y < rect.posY)) {
           // カードが隣接しているなら
           } else {
             // ブレンドモードを設定
-            rect.set({ fill: this._getHighlightFill()})
+            rect.set({ fill: this._getHighlightFill() })
             rect.Installable = true
           }
         }
@@ -243,22 +243,22 @@ export default {
      */
     _getHighlightFill () {
       return new fabric.Gradient({
-              type: 'linear',
-              coords: { x1: 0, y1: 0, x2: 0, y2: CARD_SIZE.Y },
-              colorStops: [
-                { offset: 0, color: 'blue' },
-                { offset: 1, color: 'white' }
-              ],
-          })
+        type: 'linear',
+        coords: { x1: 0, y1: 0, x2: 0, y2: CARD_SIZE.Y },
+        colorStops: [
+          { offset: 0, color: 'blue' },
+          { offset: 1, color: 'white' }
+        ]
+      })
     },
-    /** 
+    /**
      * ハイライト解除
      */
     _disHighLight () {
       const rects = this.canvaz.getObjects().filter(obj => obj.type === 'rect')
       rects.forEach(rect => {
         rect.Installable = false
-        rect.set({fill: '#2222' })
+        rect.set({ fill: '#2222' })
       })
       if (this.installCount >= 2) {
         this.installCount = 0
@@ -269,7 +269,7 @@ export default {
     /**
      * undo
      */
-     undo (addCards) {
+    undo (addCards) {
       const ac = addCards[0]
       const undoImg = this._getImgObjList().find(img => img.posX === ac.posX && img.posY === ac.posY)
       this.canvaz.remove(undoImg)
@@ -279,13 +279,12 @@ export default {
     /**
      * 0~maxのランダムの整数取得
      */
-     getRandomInt(max) {
+    getRandomInt (max) {
       return Math.floor(Math.random() * (max + 1))
     },
-    _getImgObjList() {
+    _getImgObjList () {
       return this.canvaz.getObjects().filter(obj => obj.type === 'image')
     }
   }
 }
 </script>
-

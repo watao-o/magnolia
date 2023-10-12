@@ -12,14 +12,14 @@ import { CARD_SIZE } from '@/const/common'
 export default {
   name: 'otherCardPlace',
   props: {
-    canvasName: { type: String , require: true},
+    canvasName: { type: String, require: true },
     // 他プレイヤーのカード
     cards: { type: Array },
-    canvasWidth: { type: Number}
+    canvasWidth: { type: Number }
   },
   data () {
     return {
-      canvaz: null,
+      canvaz: null
     }
   },
   mounted () {
@@ -28,11 +28,11 @@ export default {
   watch: {
     // 他プレイヤーのカード情報が更新されたら再描画
     cards: {
-      handler: function(newCards) {
+      handler: function (newCards) {
         // 描画しているものをクリア
         this._drawOtherPlayerCards(newCards)
       },
-      deep : true
+      deep: true
     }
   },
   methods: {
@@ -44,13 +44,13 @@ export default {
       this.canvaz.selectable = false
       const x = 3
       const y = 3
-      for(let i = 0 ; i < x ; i++) {
-        for(let j = 0 ; j < y ; j++) {
+      for (let i = 0; i < x; i++) {
+        for (let j = 0; j < y; j++) {
           const rect = new fabric.Rect({
             left: i * CARD_SIZE.X,
             top: j * CARD_SIZE.Y,
             width: CARD_SIZE.X,
-            height: CARD_SIZE.Y, 
+            height: CARD_SIZE.Y,
             fill: '#2222',
             stroke: 'brack',
             strokeWidth: 1,
@@ -75,7 +75,7 @@ export default {
     },
     /**
      * 他プレイヤーのカード描画
-     */    
+     */
     _drawOtherPlayerCards (newCards) {
       // 描画しているカードを全撤去
       const oldCards = this.canvaz.getObjects().filter(obj => obj.type === 'image')
@@ -88,11 +88,11 @@ export default {
       // 新しいカードを再描画
       newCards.forEach(c => {
         // カード設置
-        fabric.Image.fromURL(c.img, (obj) =>  {
-          var oImg = obj.set({ 
-              left: CARD_SIZE.X * (c.posX - minX),
-              top: CARD_SIZE.Y * (c.posY - minY)
-            })
+        fabric.Image.fromURL(c.img, (obj) => {
+          const oImg = obj.set({
+            left: CARD_SIZE.X * (c.posX - minX),
+            top: CARD_SIZE.Y * (c.posY - minY)
+          })
           oImg.scaleToWidth(CARD_SIZE.X)
           oImg.selectable = false
           oImg.id = 'card'
@@ -100,8 +100,7 @@ export default {
         })
       })
       this.canvaz.renderAll()
-   }
+    }
   }
 }
 </script>
-

@@ -35,26 +35,26 @@
 
 <script>
 export default {
-  name: "resultDialog",
+  name: 'resultDialog',
   props: {
-    room: { type: Object },
+    room: { type: Object }
   },
-  data() {
+  data () {
     return {
       showFlg: false,
-      dialogMsg: "ゲーム終了です！！",
-    };
+      dialogMsg: 'ゲーム終了です！！'
+    }
   },
   methods: {
-    openDialog() {
-      this.showFlg = true;
+    openDialog () {
+      this.showFlg = true
       // setTimeout(() => {
       //   if (this.showFlg)
       //   this.showFlg = false;
       // }, 30000);
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

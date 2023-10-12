@@ -17,7 +17,7 @@ export const UNIT_KIND = {
 // ユニット_職業
 export const UNIT_JOB = {
   // 戦士
-  KNIGHT:'01',
+  KNIGHT: '01',
   // 商人
   MERCHANT: '02',
   // 職人
@@ -27,7 +27,7 @@ export const UNIT_JOB = {
   // 聖職者
   CLERGYMAN: '05',
   // 君主
-  KING:'06'
+  KING: '06'
 }
 
 // フェイズ
@@ -38,7 +38,7 @@ export const PHASE = {
   WAR: '02',
   // 戦争後
   AFTER_WAR: '03',
-  // 発展 
+  // 発展
   DEVELOP: '04',
   // 収入
   INCOM: '05',
@@ -55,7 +55,7 @@ export const TARGET = {
   // 技術点
   TECH: '02',
   // 信仰点
-  FAITH : '03' ,
+  FAITH: '03',
   // 戦力
   WAR: '04',
   // VP
@@ -67,7 +67,7 @@ export const TARGET = {
   // 前線でなくても戦争に参加する
   SPECIAL3: '08',
   // 戦争でVPを得たなら
-  GET_WAR_VP:'09',
+  GET_WAR_VP: '09',
   // 戦争でVPを得なかったら
   NOT_GET_WAR_VP: '10'
 }
@@ -89,7 +89,7 @@ export const SYNERGY = {
   // 技術レベル
   TECH_LEVEL: '07',
   // 信仰レベル
-  FAITH_LEVEL : '08' ,
+  FAITH_LEVEL: '08',
   // 職業の種類
   JOB_KIND: '09',
   // コスト３以下のユニット
@@ -97,7 +97,7 @@ export const SYNERGY = {
   // コスト４以上のユニット
   UPPER_4_COST: '11',
   // 基本戦力４以上のユニット
-  UPPER_4_FORCE: '12',
+  UPPER_4_FORCE: '12'
 }
 // 戦争勝利ポイント
 export const WAR_VP = [
@@ -106,7 +106,7 @@ export const WAR_VP = [
     player: 1,
     // 順位、勝利点
     result: [
-      {rank:1, vp:3}
+      { rank: 1, vp: 3 }
     ]
   },
   {
@@ -114,8 +114,8 @@ export const WAR_VP = [
     player: 2,
     // 順位、勝利点
     result: [
-      {rank:1, vp:4},
-      {rank:2, vp:0}
+      { rank: 1, vp: 4 },
+      { rank: 2, vp: 0 }
     ]
   },
   {
@@ -123,9 +123,9 @@ export const WAR_VP = [
     player: 3,
     // 順位、勝利点
     result: [
-      {rank:1, vp:5},
-      {rank:2, vp:3},
-      {rank:3, vp:0}
+      { rank: 1, vp: 5 },
+      { rank: 2, vp: 3 },
+      { rank: 3, vp: 0 }
     ]
   },
   {
@@ -133,10 +133,10 @@ export const WAR_VP = [
     player: 4,
     // 順位、勝利点
     result: [
-      {rank:1, vp:5},
-      {rank:2, vp:3},
-      {rank:3, vp:0},
-      {rank:4, vp:0}
+      { rank: 1, vp: 5 },
+      { rank: 2, vp: 3 },
+      { rank: 3, vp: 0 },
+      { rank: 4, vp: 0 }
     ]
   },
   {
@@ -144,11 +144,11 @@ export const WAR_VP = [
     player: 5,
     // 順位、勝利点
     result: [
-      {rank:1, vp:5},
-      {rank:2, vp:3},
-      {rank:3, vp:1},
-      {rank:4, vp:0},
-      {rank:5, vp:0}
+      { rank: 1, vp: 5 },
+      { rank: 2, vp: 3 },
+      { rank: 3, vp: 1 },
+      { rank: 4, vp: 0 },
+      { rank: 5, vp: 0 }
     ]
   }
 ]
@@ -156,9 +156,9 @@ export const WAR_VP = [
 // ボーナス区分
 export const BONUS_DIV = {
   // 種族
-  KIND:'01',
+  KIND: '01',
   // 職業
-  JOB:'02'
+  JOB: '02'
 }
 
 // 点
@@ -168,11 +168,11 @@ export const POINT = {
   // 技術
   TECH: '02',
   // 信仰
-  FAITH:'03',
+  FAITH: '03',
   // 戦力
-  WAR:'04',
+  WAR: '04',
   // VP
-  VP:'05'
+  VP: '05'
 }
 
 export const GRID_SIZE = 30

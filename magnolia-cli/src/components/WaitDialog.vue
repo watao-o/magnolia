@@ -28,11 +28,11 @@ export default {
     }
   },
   methods: {
-    openDialog(msg) {
+    openDialog (msg) {
       if (!_.isEmpty(msg)) this.dialogMsg = msg
       this.showFlg = true
     },
-    closeDialog(){
+    closeDialog () {
       this.showFlg = false
     }
   }

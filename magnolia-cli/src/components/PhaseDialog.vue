@@ -27,14 +27,14 @@ export default {
     }
   },
   methods: {
-    openDialog(msg) {
+    openDialog (msg) {
       this.dialogMsg = msg
       this.showFlg = true
       // 指定秒数後にダイアログを閉じる
       setTimeout(() => {
-        this.showFlg = false;
+        this.showFlg = false
         this.nextPhase()
-      }, 2500);
+      }, 2500)
     }
   }
 }
